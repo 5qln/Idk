@@ -14,8 +14,9 @@
 # Optional:
 #   HERMES_SKILLS   Where the skill goes (default: ~/.hermes/skills)
 #
-# There are no engines, no daemons, no cron jobs. /idk runs only when a human
-# is present and types it. The human at the membrane is the whole runtime.
+# The gate machine (xyzab_state.py) enforces phase discipline. It runs only
+# when the agent calls it — no daemons, no cron, no headless loop. The human
+# at the membrane validates each gate; the script enforces the sequence.
 
 set -e
 
@@ -72,7 +73,21 @@ cp "${REPO_DIR}/codex.md" "${HERMES_SKILLS}/idk/codex.md"
 echo -e "   ${GREEN}✓${NC} idk → ${HERMES_SKILLS}/idk"
 echo ""
 
-# ── 3. Done ───────────────────────────────────────────────────────────
+# ── 3. Install the gate machine ───────────────────────────────────────
+echo -e "${BOLD}3. Installing the gate machine${NC}"
+
+if [ ! -f "${REPO_DIR}/scripts/xyzab_state.py" ]; then
+    echo -e "   ${RED}✗${NC} scripts/xyzab_state.py not found — the checkout looks incomplete. Re-clone."
+    exit 1
+fi
+
+mkdir -p "${HERMES_SKILLS}/idk/scripts"
+cp "${REPO_DIR}/scripts/xyzab_state.py" "${HERMES_SKILLS}/idk/scripts/xyzab_state.py"
+chmod +x "${HERMES_SKILLS}/idk/scripts/xyzab_state.py"
+echo -e "   ${GREEN}✓${NC} xyzab_state.py → ${HERMES_SKILLS}/idk/scripts/"
+echo ""
+
+# ── 4. Done ───────────────────────────────────────────────────────────
 echo -e "${GREEN}${BOLD}Ready.${NC}"
 echo ""
 echo -e " In chat with your Hermes agent:"

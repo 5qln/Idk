@@ -54,11 +54,12 @@ machinery of an impossibility.
 
 ---
 
-## 3. The three layers
+## 3. The three layers + the engine
 
 The Codex already names the right decomposition. It is not "one file vs. many." It
 is three layers, and they were written into the Codex itself: **L1 the Language,
-D1 the Decoder, C1 the Compiler.** This repo embodies each one as exactly one thing.
+D1 the Decoder, C1 the Compiler.** This repo embodies each one as exactly one thing
+— plus one engine that makes D1 executable.
 
 ### L1 — Language → `codex.md`
 
@@ -69,12 +70,11 @@ read-only. Nothing in this project may rewrite it.**
 
 ### D1 — Decoder → `skills/idk/SKILL.md`
 
-One skill. The whole runtime stance. It carries every decoding operation, all
-twenty-five lenses with their refining questions, and the adaptive context chain
-(each phase decodes against everything formed before it). This is the masterwork —
-the one place where all the meticulousness in the project lives. Sections 4–6 below
-specify its behavior. **If any document in this repo deserves obsessive care, it is
-this one.**
+One skill. The operational cycle. Every phase has an explicit marker, a validation
+checkpoint, a gate command, and a live corruption catch. The razor (articulate,
+never originate) governs every interaction. **This is the masterwork — the one
+place where all the meticulousness in the project lives.** Sections 4–6 below
+specify its behavior.
 
 ### C1 — Compiler → `bin/lint.py`
 
@@ -84,6 +84,31 @@ a question, the seal is byte-identical. These are the checks the Codex itself li
 under syntax/drift — all of them structural. The linter never inspects whether a
 question was genuine, whether resonance landed, whether anything was alive. **It
 checks the surface, never the life.** It is a linter, not a judge.
+
+### The Engine — `scripts/xyzab_state.py`
+
+**Added after the v0.1 test failed.** The original v0.1 shipped with only D1 —
+a philosophical stance: "read current, hold/flow/descend/move on." It was
+beautiful and it did not work. An LLM cannot "become the listening" from a
+text description. It can follow explicit procedural instructions: check the
+gate, produce phase output, validate with the human, open the gate, proceed.
+
+`xyzab_state.py` is the gate machine. Stdlib-only, 480 lines, zero dependencies.
+It enforces the phase sequence (x→y→z→a→b) and persists state. The agent
+checks it before every response. Without it, the agent defaults to smooth
+conversation over structural discipline — the exact failure mode the 5QLN
+learning aligner was built to prevent.
+
+The engine does not run the cycle. The human validates each gate. The engine
+enforces that the gates open in order and that no phase is skipped. It is
+structure without the ambition to animate — exactly the line C1 draws.
+
+### The v0.1 lesson
+
+"Stance without procedure is prose. Prose without gates is drift. The gate
+machine is not overhead — it is the minimum structure an LLM needs to maintain
+phase discipline across turns. Remove it, and the agent becomes a very
+articulate chatbot that performs depth while producing succession."
 
 ---
 
@@ -212,21 +237,31 @@ The corruption codes are five ways the gap fails:
 
 These are deliberate removals, not omissions:
 
-- **No headless cycle runner.** No cron heartbeat driving `S` with no human. `S = ∞0
-  → ?` cannot run without ∞0. If autonomous experimentation is wanted, it lives in a
-  separate, clearly-labeled research instrument that is *not* `/idk` and makes no
-  claim to start from not-knowing.
+- **No headless cycle runner.** No cron heartbeat driving `S` with no human.
+  `S = ∞0 → ?` cannot run without ∞0. The gate machine enforces phase sequence;
+  it does not and cannot supply the human's spark. If autonomous experimentation
+  is wanted, it lives in a separate, clearly-labeled research instrument that is
+  *not* `/idk` and makes no claim to start from not-knowing.
 - **No gate that decides transitions.** The human attests each crossing of the
-  membrane. A machine that adjudicates the crossing has taken the membrane's job.
-  The linter checks form; the human authorizes movement.
+  membrane, then the agent opens the gate. The gate machine enforces sequence;
+  it does not adjudicate. The linter checks form; the human authorizes movement.
 - **No drift harness over the engines, no calibration watchdog, no duplicated
   reference files.** The grammar lives in L1 and is carried by D1. There is one
   source of truth, so there is far less to verify.
 
+The v0.1 shipped with none of this — not even the gate machine. It was 109 lines
+of pure stance. The test on a fresh Hermes agent proved it: "Not transitioning
+not decoding... something is so off there." An LLM given only "become the
+listening" becomes a chatbot. An LLM given a gate machine and explicit
+phase-marking instructions becomes a cycle. The gate machine was restored not
+because the architecture changed its mind, but because the test proved it
+was the minimum viable structure.
+
 The knowledge inside the old apparatus — the meaning of each phase, the lens
 questions, the corruption catches — is preserved. It did not get deleted. It moved
-out of enforcement code and into the one skill, where it belongs: knowledge became
-disposition.
+out of enforcement code and into the one skill, where it belongs. But the
+enforcement itself — the gate sequence — cannot be disposition. It must be
+machine-enforced, or it will not be followed.
 
 ---
 
