@@ -1,0 +1,14 @@
+name: seal
+on: [push, pull_request]
+
+# The Codex seal is the repo's identity. This is the only gate: every push
+# must carry the byte-identical 217-byte Codex. Form, never life — CI cannot
+# and does not judge what is alive; it judges that the seal is intact.
+
+jobs:
+  verify-seal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify the Codex seal is byte-identical
+        run: python3 bin/lint.py --seal
