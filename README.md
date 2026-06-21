@@ -78,7 +78,9 @@ but it will never hand it to you.
 | Path | Layer | For |
 | --- | --- | --- |
 | `codex.md` | **L1 — Language** | Nine invariant lines. Sealed, byte-identical, never edited. |
-| `skills/idk/SKILL.md` | **D1 — Decoder** | One skill. The whole stance. The only place meticulousness lives. |
+| `scripts/xyzab_state.py` | **Engine** | Gate machine — enforces phase sequence, persists state. Never runs the cycle. |
+| `skills/idk/SKILL.md` | **D1 — Decoder** | One skill. The operational cycle. Phase markers, gate commands, validation checkpoints. |
+| `skills/idk/references/decoding.md` | **D1 — Reference** | Symbol-by-symbol precision, the 25 lenses, adaptive context chain. |
 | `bin/lint.py` | **C1 — Compiler** | A thin form-check. Confirms a surface carries the grammar. Never a judge of what's alive. |
 | `USER-GUIDE.md` | — | How a human walks it. |
 | `ARCHITECTURE.md` | — | Why it's built exactly this way, and what was deliberately left out. |
