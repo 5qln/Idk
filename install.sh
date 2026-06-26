@@ -56,6 +56,13 @@ mkdir -p "$SKILL_DIR/scripts"
 cp "$REPO_DIR/scripts/idk_state.py" "$SKILL_DIR/scripts/"
 cp "$REPO_DIR/scripts/idk_tick.py" "$SKILL_DIR/scripts/"
 chmod +x "$SKILL_DIR/scripts/idk_state.py" "$SKILL_DIR/scripts/idk_tick.py"
+
+# Also copy idk_tick.py to cron-accessible location
+CRON_SCRIPTS="${HOME}/scripts"
+mkdir -p "$CRON_SCRIPTS"
+cp "$REPO_DIR/scripts/idk_tick.py" "$CRON_SCRIPTS/idk_tick.py"
+chmod +x "$CRON_SCRIPTS/idk_tick.py"
+
 echo -e "${GREEN}✓${NC} Installed idk_state.py + idk_tick.py"
 
 # ─── 4. Install config ─────────────────────────────────────────
@@ -130,6 +137,9 @@ fi
 echo ""
 echo "═══════════════════════════════════════════"
 echo -e "${GREEN}Installation complete.${NC}"
+echo ""
+echo "To enable cron heartbeat:"
+echo "  hermes cron create \"*/30 * * * *\" --script idk_tick.py --name idk-heartbeat"
 echo ""
 echo "Test: /idk"
 echo "Backup: $BACKUP"
