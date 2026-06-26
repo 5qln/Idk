@@ -90,8 +90,15 @@ def load_state(cfg: dict) -> dict:
 def main():
     cfg = load_config()
     state = load_state(cfg)
+
+    status = {
+        "void_active": state.get("active", False),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
+
     if not state.get("active"):
-        print("[SILENT]")
+        status["status"] = "idle"
+        print(json.dumps(status))
         return
 
     alerts = []
