@@ -370,34 +370,9 @@ def cmd_close(state: Dict[str, Any], gate: str) -> None:
     }, indent=2))
 
 
-def _auto_archive(state: Dict[str, Any]) -> bool:
-    """If all gates are open, archive the completed cycle before reset.
-    Gracefully degrades if archive_cycle.py is not available."""
-    if not all(state["gates"][g]["open"] for g in GATES):
-        return False
-    try:
-        import importlib.util
-        here = Path(__file__).resolve().parent
-        archiver = here / "archive_cycle.py"
-        if not archiver.exists():
-            return False
-        spec = importlib.util.spec_from_file_location("archive_cycle", archiver)
-        mod = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(mod)
-        mod.archive(session=None, dry_run=False)
-        return True
-    except Exception:
-        return False
-
-
-def cmd_reset(state: Dict[str, Any], no_archive: bool = False) -> None:
+def cmd_reset(state: Dict[str, Any]) -> None:
     prev_cycle = state["cycle_count"]
     prev_gates = {gate: state["gates"][gate]["open"] for gate in GATES}
-
-    archived = False
-    if not no_archive:
-        archived = _auto_archive(state)
-
     state["cycle_count"] += 1
     for gate in GATES:
         state["gates"][gate] = {"open": False, "content": None, "opened_at": None}
@@ -409,7 +384,6 @@ def cmd_reset(state: Dict[str, Any], no_archive: bool = False) -> None:
         "prev_cycle": prev_cycle,
         "new_cycle": state["cycle_count"],
         "prev_gates": prev_gates,
-        "archived": archived,
     }, indent=2))
 
 
@@ -462,9 +436,7 @@ def main() -> None:
 
     sub.add_parser("status", help="Show all gates + current pending")
     sub.add_parser("gate", help="Show which gate is currently pending (JSON)")
-    reset_p = sub.add_parser("reset", help="Reset all gates for new cycle")
-    reset_p.add_argument("--no-archive", action="store_true",
-                         help="Skip auto-archiving the completed cycle")
+    sub.add_parser("reset", help="Reset all gates for new cycle")
     sub.add_parser("trail", help="Show full gate trail with content (JSON)")
     sub.add_parser("verify", help="Verify state consistency (JSON)")
 
@@ -494,7 +466,7 @@ def main() -> None:
         elif args.command == "close":
             cmd_close(state, args.gate)
         elif args.command == "reset":
-            cmd_reset(state, no_archive=getattr(args, "no_archive", False))
+            cmd_reset(state)
         elif args.command == "trail":
             cmd_trail(state)
         elif args.command == "verify":
