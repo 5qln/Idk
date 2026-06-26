@@ -45,8 +45,10 @@ fi
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PLUGIN_SRC="${SCRIPT_DIR}"
-if [ ! -f "$PLUGIN_SRC/plugin.yaml" ]; then
-    echo -e "${RED}Error: plugin.yaml not found. Run from the plugin/idk/ directory.${NC}"
+# Source scripts live alongside install.sh in the repo root
+if [ ! -f "$PLUGIN_SRC/scripts/idk_state.py" ]; then
+    echo -e "${RED}Error: scripts/idk_state.py not found alongside install.sh${NC}"
+    echo "Clone the full Idk repo: git clone https://github.com/5qln/Idk.git && cd Idk && bash install.sh"
     exit 1
 fi
 
@@ -93,7 +95,7 @@ python3 ~/.hermes/skills/5qln/symbolic-interpretation/scripts/xyzab_state.py gat
 python3 scripts/idk_state.py open    # Enter Void mode
 ```
 
-Reply: `[S-PHASE · VOID] I amm here. Take your time.`
+Reply: `[S-PHASE · VOID] I'm here. Take your time.`
 
 ### /idk Commands
 
