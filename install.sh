@@ -162,21 +162,29 @@ Harness pre-hook injects Void state. Write Gate blocks L1/L3/L4 emissions.
 Agent CANNOT emit corrupted output. Structural enforcement.
 '
 
-    # Insert after the "Reply (True S" line block
+    # Replace the old Startup section with Void posture
     python3 -c "
 import re
 path = '$SKILL_DIR/SKILL.md'
 with open(path) as f:
     content = f.read()
 
-# Find the second '## ' heading (after Startup) to insert before
-# Insert after the Startup section, before The Law
-marker = '## The Law'
+# Find the old Startup block — from '## Startup' through the line before '## The Law'
+old_startup_start = content.find('## Startup')
+old_law_start = content.find('## The Law')
+
+if old_startup_start == -1 or old_law_start == -1:
+    print('ERROR: Could not find Startup or The Law markers')
+    exit(1)
+
 void_block = '''$VOID_BLOCK'''
-content = content.replace(marker, void_block + '\n' + marker, 1)
+
+# Replace: keep everything before Startup, insert Void posture, then The Law onward
+new_content = content[:old_startup_start] + void_block + '\n' + content[old_law_start:]
 
 with open(path, 'w') as f:
-    f.write(content)
+    f.write(new_content)
+print('OK')
 "
     echo -e "${GREEN}✓${NC} Patched SKILL.md with Void posture"
 fi
