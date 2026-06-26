@@ -1,0 +1,8 @@
+idk:
+  max_void_hours: 24
+  max_agent_outputs_in_void: 3
+  auto_log_fragments: true
+  xyzab_integration: true
+  corruption_checks: true
+  inquiry_field_path: /opt/data/5qln-wiki/state/inquiry-field/
+  state_dir: /opt/data/5qln-wiki/plugins/idk/state/
