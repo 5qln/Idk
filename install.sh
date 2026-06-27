@@ -19,9 +19,11 @@ echo ""
 
 SKILL_DIR=""
 for candidate in \
-    "${HOME}/skills/5qln/idk" \
-    "${HOME}/.hermes/skills/5qln/idk" \
-    "/opt/data/skills/5qln/idk"; do
+    "${HOME}/skills/idk" \
+    "${HOME}/.hermes/skills/idk" \
+    "/opt/data/skills/idk" \
+    "${HERMES_HOME}/skills/idk" \
+    "${HERMES_SKILLS}/idk"; do
     if [ -f "$candidate/SKILL.md" ]; then
         SKILL_DIR="$candidate"
         break

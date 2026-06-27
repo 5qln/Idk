@@ -60,16 +60,20 @@ opens a new question (V).
 Send one message to your Hermes agent:
 
 > Clone `https://github.com/5qln/idk` into `~/idk`, run `bash ~/idk/setup.sh`,
-> then load the `idk` skill. When it's ready, wait for me to type `/idk`.
+> then load the `idk` skill. When it's ready, wait for me.
 
 Then type:
 
 ```
-/idk
+IDK
 ```
 
-And don't reach for a question. Let one come. The agent will help you find it —
-but it will never hand it to you.
+Or the slash command `/idk` — both work. And don't reach for a question. Let one come.
+The agent will help you find it — but it will never hand it to you.
+
+Three ways to walk the cycle: **Step by step** (pause at each phase), **Flow** (carry
+through in one movement), or **Decode** (see the formal language alongside the
+conversation). Tell the agent which you want — or let it choose.
 
 ---
 
