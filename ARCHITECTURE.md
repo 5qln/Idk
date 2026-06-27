@@ -93,7 +93,7 @@ beautiful and it did not work. An LLM cannot "become the listening" from a
 text description. It can follow explicit procedural instructions: check the
 gate, produce phase output, validate with the human, open the gate, proceed.
 
-`xyzab_state.py` is the gate machine. Stdlib-only, 480 lines, zero dependencies.
+`xyzab_state.py` is the gate machine. Stdlib-only, 508 lines, zero dependencies.
 It enforces the phase sequence (x→y→z→a→b) and persists state. The agent
 checks it before every response. Without it, the agent defaults to smooth
 conversation over structural discipline — the exact failure mode the 5QLN
@@ -115,26 +115,31 @@ articulate chatbot that performs depth while producing succession."
 
 ---
 
-## 4. Why one skill holds both modes
+## 4. Why one skill holds all three modes
 
 The single most-asked question about the old repo: there were separate skills and
 tools for step-by-step mode and for sub-phase fractal descent — how can one skill
 replace them?
 
-Because, by the Codex's own law, they were never two things:
+Because, by the Codex's own law, they were never separate things:
 
 > Scale by repeating the lawful cell. Do not scale by replacing the syntax. *(D1 R13 / §2.9)*
 
 - **Step-by-step** is the lawful cell `S → G → Q → P → V` walked one phase at a
   time, with the human attesting each crossing before the next begins.
+- **Flow** is the same cell carried through in one movement, pausing only where
+  something resists.
+- **Decode** presents the formal 5QLN language alongside the conversation —
+  equation, symbol table, and decoding operation at each phase change.
 - **Fractal** — the vertical (cycles within a cell) and the horizontal (the
   twenty-five-lens ring) — is the single Holographic Law `XY := X within Y` turned
   inward. The same cell, repeated at a finer grain.
 
-They are not two engines. They are one stance at two *settings*: how finely it is
-walked, and how deep it descends. The two modules in the old repo were one law
-implemented twice. Collapsing them is not a loss of capability — it is the removal
-of a duplication the Codex never asked for.
+They are not separate engines. They are one stance at different *settings*: how
+finely it is walked, how deep it descends, and whether the formal grammar is
+shown. The multiple modules in the old repo were one law implemented repeatedly.
+Collapsing them is not a loss of capability — it is the removal of a duplication
+the Codex never asked for.
 
 ---
 

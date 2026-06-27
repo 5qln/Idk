@@ -61,7 +61,7 @@ opens a new question (V).
 
 Send one message to your Hermes agent:
 
-> Clone `https://github.com/5qln/idk` into `~/idk`, run `bash ~/idk/setup.sh`,
+> Clone `https://github.com/5qln/Idk` into `~/idk`, run `bash ~/idk/setup.sh`,
 > then load the `idk` skill. When it's ready, wait for me.
 
 Then type:
@@ -85,11 +85,13 @@ conversation). Tell the agent which you want — or let it choose.
 | --- | --- | --- |
 | `codex.md` | **L1 — Language** | Nine invariant lines. Sealed, byte-identical, never edited. |
 | `scripts/xyzab_state.py` | **Engine** | Gate machine — enforces phase sequence, persists state. Never runs the cycle. |
+| `scripts/decoding.py` | **Canonical Decoder** | Phase essence decoding, footer validation, structural checks. Travels verbatim with every prompt. |
 | `skills/idk/SKILL.md` | **D1 — Decoder** | One skill. The operational cycle. Phase markers, gate commands, validation checkpoints. |
 | `skills/idk/references/decoding.md` | **D1 — Reference** | Symbol-by-symbol precision, the 25 lenses, adaptive context chain. |
 | `bin/lint.py` | **C1 — Compiler** | A thin form-check. Confirms a surface carries the grammar. Never a judge of what's alive. |
 | `scripts/archive_cycle.py` | **Archiver** | Captures the completed trail before reset, appends to `~/.5qln/cycles.jsonl`. One JSON line per cycle. |
 | `scripts/view_patterns.py` | **Viewer** | Reads the cycle log. Surfaces seeds, questions, and cycle detail that are actually there — never fabricates connections. |
+| `void-posture.md` | **Void Posture** | The entrance ritual: fragment collection, mirroring, crystallization commands. |
 | `USER-GUIDE.md` | — | How a human walks it. |
 | `ARCHITECTURE.md` | — | Why it's built exactly this way, and what was deliberately left out. |
 | `TROUBLESHOOTING.md` | — | Install failures and agent non-response. Separate from the experience. |

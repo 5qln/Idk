@@ -4,4 +4,5 @@ idk:
   auto_log_fragments: true
   xyzab_integration: true
   corruption_checks: true
+  inquiry_field_path: ~/.5qln/inquiry-field
   state_dir: ~/.5qln/

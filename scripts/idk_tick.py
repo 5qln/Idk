@@ -34,7 +34,7 @@ def load_config() -> dict:
         "idk": {
             "max_void_hours": 24,
             "max_agent_outputs_in_void": 3,
-            "state_dir": "/opt/data/5qln-wiki/plugins/idk/state/",
+            "state_dir": str(Path.home() / ".5qln"),
         }
     }
     cp = config_path()

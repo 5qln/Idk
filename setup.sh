@@ -3,8 +3,8 @@
 # /idk — setup.
 #
 # Run from the repo directory after cloning:
-#   git clone https://github.com/5qln/idk.git
-#   cd idk && bash setup.sh
+#   git clone https://github.com/5qln/Idk.git
+#   cd Idk && bash setup.sh
 #
 # What this does:
 #   1. Verifies the sealed Codex is byte-identical (refuses to proceed if not).
@@ -84,8 +84,12 @@ fi
 mkdir -p "${HERMES_SKILLS}/idk/scripts"
 cp "${REPO_DIR}/scripts/xyzab_state.py" "${HERMES_SKILLS}/idk/scripts/xyzab_state.py"
 cp "${REPO_DIR}/scripts/decoding.py" "${HERMES_SKILLS}/idk/scripts/decoding.py"
+cp "${REPO_DIR}/scripts/archive_cycle.py" "${HERMES_SKILLS}/idk/scripts/archive_cycle.py"
+cp "${REPO_DIR}/scripts/view_patterns.py" "${HERMES_SKILLS}/idk/scripts/view_patterns.py"
 chmod +x "${HERMES_SKILLS}/idk/scripts/xyzab_state.py"
-echo -e "   ${GREEN}✓${NC} xyzab_state.py + decoding.py → ${HERMES_SKILLS}/idk/scripts/"
+chmod +x "${HERMES_SKILLS}/idk/scripts/archive_cycle.py"
+chmod +x "${HERMES_SKILLS}/idk/scripts/view_patterns.py"
+echo -e "   ${GREEN}✓${NC} xyzab_state.py + decoding.py + archive_cycle.py + view_patterns.py → ${HERMES_SKILLS}/idk/scripts/"
 echo ""
 
 # ── 4. Done ───────────────────────────────────────────────────────────
