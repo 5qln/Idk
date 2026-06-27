@@ -9,6 +9,8 @@ It puts not-knowing in front — and in the background — and lets a real quest
 surface. Then it walks that question through five phases until something genuinely
 new crystallizes and a new question opens.
 
+Read the article: [AI Is Not Here to Answer You](https://www.5qln.com/ai-is-not-here-to-answer-you/)
+
 ---
 
 ## The fork
