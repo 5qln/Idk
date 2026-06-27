@@ -88,6 +88,8 @@ conversation). Tell the agent which you want — or let it choose.
 | `skills/idk/SKILL.md` | **D1 — Decoder** | One skill. The operational cycle. Phase markers, gate commands, validation checkpoints. |
 | `skills/idk/references/decoding.md` | **D1 — Reference** | Symbol-by-symbol precision, the 25 lenses, adaptive context chain. |
 | `bin/lint.py` | **C1 — Compiler** | A thin form-check. Confirms a surface carries the grammar. Never a judge of what's alive. |
+| `scripts/archive_cycle.py` | **Archiver** | Captures the completed trail before reset, appends to `~/.5qln/cycles.jsonl`. One JSON line per cycle. |
+| `scripts/view_patterns.py` | **Viewer** | Reads the cycle log. Surfaces seeds, questions, and cycle detail that are actually there — never fabricates connections. |
 | `USER-GUIDE.md` | — | How a human walks it. |
 | `ARCHITECTURE.md` | — | Why it's built exactly this way, and what was deliberately left out. |
 | `TROUBLESHOOTING.md` | — | Install failures and agent non-response. Separate from the experience. |
