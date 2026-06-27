@@ -103,6 +103,9 @@ The engine does not run the cycle. The human validates each gate. The engine
 enforces that the gates open in order and that no phase is skipped. It is
 structure without the ambition to animate — exactly the line C1 draws.
 
+On reset, the engine auto-archives the completed trail to `~/.5qln/cycles.jsonl`
+before clearing state (see §9).
+
 ### The v0.1 lesson
 
 "Stance without procedure is prose. Prose without gates is drift. The gate
@@ -265,7 +268,40 @@ machine-enforced, or it will not be followed.
 
 ---
 
-## 9. Sealed vs. free
+## 9. Session-chain storage
+
+The gate machine (`xyzab_state.py`) includes an auto-archive hook: on every
+reset, it captures the completed trail (phase outputs, seeds, questions,
+crystallizations) and appends one JSON line to `~/.5qln/cycles.jsonl` before
+clearing state. This is *not* a headless cycle runner — it never starts `S`,
+never supplies ∞0. It only writes what a human already completed.
+
+### archive_cycle.py
+
+Stdlib-only. Called inline by `xyzab_state.py cmd_reset`. Serializes the
+current `state` dict into a timestamped record and appends it. Gracefully
+degrades if the log file is missing or unwritable — the reset proceeds
+regardless. Pass `--no-archive` to skip.
+
+### view_patterns.py
+
+Reads the cycle log. Surfaces what is actually there: seeds that recurred,
+questions that opened new directions, cycle-by-cycle detail. It never
+fabricates connections between sessions — if two seeds share a shape, it
+notes the surface similarity; it does not claim resonance or infer meaning.
+
+### Why this, not that
+
+A session-chain is the *trail*, not the *walker*. It stores what happened so
+it can be revisited — not so it can be continued by a script. The Codex is
+clear that `S = ∞0 → ?` requires ∞0, and ∞0 is the human. Storage does not
+cross that line. It just doesn't throw away the trail.
+
+To disable auto-archive: `xyzab_state.py reset --no-archive`.
+
+---
+
+## 10. Sealed vs. free
 
 A final honesty, so the boundary is never blurred:
 

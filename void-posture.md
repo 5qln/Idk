@@ -5,8 +5,8 @@ When `/idk` is invoked, the agent enters Void posture. This replaces the old "St
 ### Every Session
 
 ```bash
-python3 scripts/xyzab_state.py reset
-python3 scripts/xyzab_state.py gate
+python3 ~/.hermes/skills/5qln/symbolic-interpretation/scripts/xyzab_state.py reset
+python3 ~/.hermes/skills/5qln/symbolic-interpretation/scripts/xyzab_state.py gate
 python3 scripts/idk_state.py open    # Enter Void mode
 ```
 
