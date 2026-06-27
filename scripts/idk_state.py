@@ -16,7 +16,7 @@ Commands:
   fragment <text>   Add a fragment to the buffer
   reflect           Return buffer contents for agent to mirror
   deepen            Return buffer + deepening prompt context
-  crystallize <X>   Validate X, close Void, log to IF-DB, open xyzab gate x
+  crystallize <X>   Open xyzab gate x; on success close Void and log to IF-DB
   release           Close Void without crystallization (legitimate abort)
   status            Show buffer size, time in Void, corruption flags
   close             Force-close (admin)
@@ -183,16 +183,37 @@ def cmd_crystallize(cfg: dict, x: str):
     if not state["active"]:
         print(json.dumps({"ok": False, "error": "void_not_active"}))
         return
-    state["crystallized_x"] = x
-    state["active"] = False
-    # Log to inquiry-field
-    if cfg.get("auto_log_fragments"):
-        _log_to_if_db(cfg, state)
-    save_state(cfg, state)
-    # Open xyzab gate x if integration enabled
+
+    # Hand off to the gate machine FIRST. The gate machine is the sole phase
+    # authority — if it will not open gate x, the spark has not crystallized,
+    # so the Void stays open and nothing is lost. We never report success on a
+    # shut gate, and we never close Void out from under a rejected spark.
     xyzab_result = None
     if cfg.get("xyzab_integration"):
         xyzab_result = _open_xyzab_gate_x(x)
+        if not xyzab_result.get("opened"):
+            print(json.dumps({
+                "ok": False,
+                "action": "crystallize_rejected",
+                "X": x,
+                "reason": xyzab_result.get("reason"),
+                "gate_violations": xyzab_result.get("violations"),
+                "hint": xyzab_result.get("hint") or (
+                    "The gate did not open. Restate X as a question — it may "
+                    "open with what/where/why/how/whether… or end in ? — then "
+                    "crystallize again. (Or open gate x with --override to "
+                    "record a human decision.)"),
+                "void": "still open — nothing lost",
+                "xyzab_gate_x": xyzab_result,
+            }, indent=2, default=str))
+            return
+
+    # Gate opened (or integration disabled): the crossing is real. Close Void.
+    state["crystallized_x"] = x
+    state["active"] = False
+    if cfg.get("auto_log_fragments"):
+        _log_to_if_db(cfg, state)
+    save_state(cfg, state)
     print(json.dumps({
         "ok": True,
         "action": "crystallized",
@@ -256,22 +277,55 @@ def _log_to_if_db(cfg: dict, state: dict):
         json.dump(entry, fh, indent=2, default=str)
 
 
+def _find_xyzab() -> Optional[str]:
+    """Locate xyzab_state.py: env override, then sibling (the normal install —
+    setup.sh puts both in the same scripts/ dir), then the canonical path.
+    Resolving relative to this file means the bridge also works from the repo,
+    not only from ~/.hermes."""
+    env = os.environ.get("QLN_XYZAB")
+    here = Path(__file__).resolve().parent
+    for c in (
+        Path(env) if env else None,
+        here / "xyzab_state.py",
+        Path(os.path.expanduser("~/.hermes/skills/idk/scripts/xyzab_state.py")),
+    ):
+        if c and c.is_file():
+            return str(c)
+    return None
+
+
 def _open_xyzab_gate_x(x: str) -> dict:
-    """Attempt to open xyzab gate x. Returns result or error."""
+    """Hand the validated X to the gate machine and open gate x. Always returns
+    an explicit 'opened' flag; on rejection it surfaces the gate's own
+    violations and hint — so the caller can never mistake a shut gate for a
+    crossing."""
     import subprocess
-    xyzab_script = os.path.expanduser(
-        "~/.hermes/skills/idk/scripts/xyzab_state.py"
-    )
-    if not os.path.isfile(xyzab_script):
-        return {"error": "xyzab_state.py not found"}
+    script = _find_xyzab()
+    if script is None:
+        return {"opened": False, "reason": "not_found",
+                "detail": "xyzab_state.py not found — set QLN_XYZAB, or install "
+                          "the idk skill so it sits beside idk_state.py."}
     try:
         result = subprocess.run(
-            [sys.executable, xyzab_script, "open", "x", "-c", x],
-            capture_output=True, text=True, timeout=10
+            [sys.executable, script, "open", "x", "-c", x],
+            capture_output=True, text=True, timeout=10,
         )
-        return {"exit_code": result.returncode, "stdout": result.stdout.strip(), "stderr": result.stderr.strip()}
     except Exception as e:
-        return {"error": str(e)}
+        return {"opened": False, "reason": "error", "detail": str(e)}
+
+    out = {"opened": result.returncode == 0,
+           "exit_code": result.returncode,
+           "stdout": result.stdout.strip(),
+           "stderr": result.stderr.strip()}
+    if result.returncode != 0:
+        out["reason"] = "rejected"
+        try:
+            parsed = json.loads(result.stdout)
+            out["violations"] = parsed.get("violations", [])
+            out["hint"] = parsed.get("hint")
+        except (ValueError, TypeError):
+            pass
+    return out
 
 
 if __name__ == "__main__":

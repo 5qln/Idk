@@ -107,8 +107,8 @@ PHASE_ESSENCE = {
         "Receptive, not empty.\n"
         "2. RECEIVE → — when something stirs, it is emergence, not generation. "
         "The arrow must be unforced or it is not the start.\n"
-        "3. NAME ? — what arrived is named as a question. A complete sentence "
-        "ending in ?, not a topic.\n"
+        "3. NAME ? — what arrived is named as a question (it ends in ? or "
+        "opens with what/where/why/how/whether…), not a topic.\n"
         "4. VALIDATE X — genuine (arrived through not-knowing), not "
         "manufactured (assembled from K).\n"
         "The seed holds the potential of the entire forest. Protect the space; "
@@ -202,7 +202,7 @@ PHASE_ESSENCE = {
 # without the checker pretending to judge truth.
 
 PHASE_FOOTER_SPEC = {
-    "S": "X: <the question, a complete sentence ending in ?>",
+    "S": "X: <the question — ends in ? or opens with what/where/why/how/…>",
     "G": ("ALPHA: <the irreducible essence, one clause>\n"
           "SEEKS: <what α inherently moves toward — its self-interest>"),
     "Q": ("PHI: <the work's self-interest as grown — never anyone's perception>\n"
@@ -269,6 +269,34 @@ def _norm(s: str) -> str:
     return re.sub(r"[^a-z0-9가-힣\u0590-\u05ff]+", " ", (s or "").lower()).strip()
 
 
+# ── Question form (S-phase X) — form only, never liveness ────────────────
+# A genuine question may surface without a trailing "?". SKILL.md is explicit:
+# "A question need not end in ?" — "Where do I go from here" counts if open.
+# So the form check accepts the natural shapes an open question takes (a "?"
+# anywhere, or an interrogative opener) while still rejecting bare topics and
+# answers. Whether the question is alive is the human's to attest, not decided
+# here.
+_QUESTION_OPENERS = frozenset((
+    "what", "where", "when", "who", "whom", "whose", "why", "how",
+    "which", "whether",
+    "is", "are", "am", "was", "were", "do", "does", "did",
+    "can", "could", "should", "would", "will", "shall", "may",
+    "might", "must", "has", "have", "had",
+))
+
+
+def _looks_like_question(s: str) -> bool:
+    """Form-only: does this read as a question? True if it contains '?' or
+    opens with an interrogative word. Not a judgment of whether it is open."""
+    s = (s or "").strip()
+    if not s:
+        return False
+    if "?" in s:
+        return True
+    m = re.match(r"[^A-Za-z]*([A-Za-z']+)", s)
+    return bool(m) and m.group(1).lower() in _QUESTION_OPENERS
+
+
 def check_fields(phase: str, fields: Dict[str, str],
                  seed_question: Optional[str] = None,
                  required_keys: Optional[List[str]] = None
@@ -294,9 +322,10 @@ def check_fields(phase: str, fields: Dict[str, str],
                      "(see spec)".format(key, phase))
 
     if phase == "S" and present("X"):
-        if "?" not in f["X"]:
-            v.append("X must be a question — a complete sentence ending in ?, "
-                     "not a topic or an answer")
+        if not _looks_like_question(f["X"]):
+            v.append("X must be a question — it must end in ? or open with an "
+                     "interrogative (what/where/why/how/whether/can/is/…), not "
+                     "be a bare topic or an answer")
 
     if phase == "G":
         if present("ALPHA"):
