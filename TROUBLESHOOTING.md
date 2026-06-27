@@ -20,7 +20,7 @@ The seal check and the linter need Python 3.8+. Install it, then re-run. This is
 That's the skill failing its own razor. Reload it. If it persists, it may be overridden by another loaded skill or a system instruction telling it to be maximally helpful/proactive — unload competing skills and try `/idk` in a clean session.
 
 **Where things install.**
-One skill, one place: `~/.hermes/skills/idk/` (override with `HERMES_SKILLS`). The sealed `codex.md` is copied beside it so the linter can find it. Nothing else is installed — no scripts in your path, no daemons, no cron entries.
+One skill, one place: `~/.hermes/skills/idk/` (override with `HERMES_SKILLS`). The sealed `codex.md` is copied beside it so the linter can find it. Nothing else is installed by `setup.sh` — no scripts in your path, no daemons, no cron entries. (The separate `install.sh` adds the Void posture engine + optional cron heartbeat; run it after `setup.sh` if you want those.)
 
 **Checking a surface.**
 `python3 bin/lint.py path/to/surface.md` checks that a surface carries the grammar and opens a return question. It checks form only. It cannot tell you whether anything was alive — that was always yours to know.

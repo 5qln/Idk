@@ -49,8 +49,8 @@ def load_config() -> dict:
             "auto_log_fragments": True,
             "xyzab_integration": True,
             "corruption_checks": True,
-            "inquiry_field_path": "/opt/data/5qln-wiki/state/inquiry-field/",
-            "state_dir": "/opt/data/5qln-wiki/plugins/idk/state/",
+            "inquiry_field_path": str(Path.home() / ".5qln" / "inquiry-field"),
+            "state_dir": str(Path.home() / ".5qln"),
         }
     }
     cp = config_path()
@@ -239,7 +239,7 @@ def _minutes_in_void(state: dict) -> float:
 
 
 def _log_to_if_db(cfg: dict, state: dict):
-    if_path = Path(cfg.get("inquiry_field_path", "/opt/data/5qln-wiki/state/inquiry-field/"))
+    if_path = Path(cfg.get("inquiry_field_path", str(Path.home() / ".5qln" / "inquiry-field")))
     if_path.mkdir(parents=True, exist_ok=True)
     entry = {
         "session_type": "idk_void",
@@ -260,7 +260,7 @@ def _open_xyzab_gate_x(x: str) -> dict:
     """Attempt to open xyzab gate x. Returns result or error."""
     import subprocess
     xyzab_script = os.path.expanduser(
-        "~/.hermes/skills/5qln/symbolic-interpretation/scripts/xyzab_state.py"
+        "~/.hermes/skills/idk/scripts/xyzab_state.py"
     )
     if not os.path.isfile(xyzab_script):
         return {"error": "xyzab_state.py not found"}
