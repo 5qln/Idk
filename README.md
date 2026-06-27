@@ -91,12 +91,16 @@ conversation). Tell the agent which you want — or let it choose.
 | `bin/lint.py` | **C1 — Compiler** | A thin form-check. Confirms a surface carries the grammar. Never a judge of what's alive. |
 | `scripts/archive_cycle.py` | **Archiver** | Captures the completed trail before reset, appends to `~/.5qln/cycles.jsonl`. One JSON line per cycle. |
 | `scripts/view_patterns.py` | **Viewer** | Reads the cycle log. Surfaces seeds, questions, and cycle detail that are actually there — never fabricates connections. |
-| `void-posture.md` | **Void Posture** | The entrance ritual: fragment collection, mirroring, crystallization commands. |
+| `void-posture.md` | **Void Posture** | Optional entrance ritual: fragment collection, mirroring, crystallization. |
+| `scripts/idk_state.py` | **Void Engine** | Buffer state engine for the Void posture — tracks fragments, enforces Void discipline. |
+| `scripts/idk_tick.py` | **Void Watchdog** | Cron heartbeat that monitors Void sessions for timeout and L4 risk. Watches, never drives. |
+| `install.sh` | **Void Installer** | Installs the Void posture subsystem after `setup.sh`. Separate; the basic cycle runs without it. |
+| `config.yaml` | **Config** | Void posture settings: max hours, corruption checks, state paths. |
 | `USER-GUIDE.md` | — | How a human walks it. |
 | `ARCHITECTURE.md` | — | Why it's built exactly this way, and what was deliberately left out. |
 | `TROUBLESHOOTING.md` | — | Install failures and agent non-response. Separate from the experience. |
 
-Three layers. That is the whole repo. Everything that once tried to *run* the
+Three sealed layers plus the Void subsystem. Everything that once tried to *run* the
 cycle without a human has been removed — see ARCHITECTURE.md, "What is not here."
 
 ---

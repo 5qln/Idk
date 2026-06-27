@@ -230,9 +230,10 @@ The gate machine auto-archives every cycle before reset. When `reset` is called,
 **Viewing patterns:** `view_patterns.py` reads the cycle log and surfaces what's there — seeds, questions, phase detail, cycle count, time range. It never fabricates connections or interprets. The human reads their own patterns.
 
 ```bash
-python3 scripts/view_patterns.py           # full cycle log
-python3 scripts/view_patterns.py --seeds    # all seeds (α) across cycles
-python3 scripts/view_patterns.py --detail N # full trail for cycle N
+python3 scripts/view_patterns.py            # full cycle log overview
+python3 scripts/view_patterns.py --seeds     # all seeds (α) across cycles
+python3 scripts/view_patterns.py --questions # question trajectory (X → ∞0')
+python3 scripts/view_patterns.py --cycle N   # full trail for cycle N
 ```
 
 The archive is local to `~/.5qln/` — never pushed to GitHub. Pattern visibility is the human's alone.

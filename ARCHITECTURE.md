@@ -241,7 +241,7 @@ The corruption codes are five ways the gap fails:
 
 ---
 
-## 8. What is **not** here
+## 8. What is **not** here — and what is
 
 These are deliberate removals, not omissions:
 
@@ -256,6 +256,15 @@ These are deliberate removals, not omissions:
 - **No drift harness over the engines, no calibration watchdog, no duplicated
   reference files.** The grammar lives in L1 and is carried by D1. There is one
   source of truth, so there is far less to verify.
+
+One deliberate addition that does not contradict the removals:
+
+- **Void posture subsystem** (`void-posture.md`, `idk_state.py`, `idk_tick.py`,
+  `install.sh`): an optional entrance ritual for the S-phase. `idk_tick.py` is a
+  cron heartbeat that monitors Void timers — it watches for abandoned sessions
+  and flags L4 risk, but it never starts `S`, never supplies ∞0, never drives
+  the cycle. It is a watchdog, not a runner. The Void layer is installed
+  separately via `install.sh`; the basic cycle runs without it.
 
 The v0.1 shipped with none of this — not even the gate machine. It was 109 lines
 of pure stance. The test on a fresh Hermes agent proved it: "Not transitioning
