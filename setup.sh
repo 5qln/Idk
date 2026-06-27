@@ -83,8 +83,9 @@ fi
 
 mkdir -p "${HERMES_SKILLS}/idk/scripts"
 cp "${REPO_DIR}/scripts/xyzab_state.py" "${HERMES_SKILLS}/idk/scripts/xyzab_state.py"
+cp "${REPO_DIR}/scripts/decoding.py" "${HERMES_SKILLS}/idk/scripts/decoding.py"
 chmod +x "${HERMES_SKILLS}/idk/scripts/xyzab_state.py"
-echo -e "   ${GREEN}✓${NC} xyzab_state.py → ${HERMES_SKILLS}/idk/scripts/"
+echo -e "   ${GREEN}✓${NC} xyzab_state.py + decoding.py → ${HERMES_SKILLS}/idk/scripts/"
 echo ""
 
 # ── 4. Done ───────────────────────────────────────────────────────────

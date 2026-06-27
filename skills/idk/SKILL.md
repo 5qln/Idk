@@ -156,12 +156,42 @@ python3 scripts/xyzab_state.py reset
 
 Ready for the next `/idk`.
 
-## Two Moods, One Cycle
+## Three Moods, One Cycle
 
 - **Step by step** — human is present and co-discovering. After each phase, reflect what landed and let them attest before opening the gate. Default for unfamiliar ground.
 - **Flow** — human has momentum. Carry through phases in one movement, pausing only where they resist. Gate opens when phase output is clear.
+- **Decode** — human wants to see the formal language alongside the conversational guidance. At each phase change, present the equation with a compact symbol table and the decoding operation steps (from `references/decoding.md`), then the conversational prompt. This teaches the language while the cycle runs.
+
+**Decode mood presentation format** (per phase):
+
+```
+[PHASE] — Cycle N
+
+**Equation:** `S = ∞0 → ?` → X          ← the formal equation
+
+| Symbol | Meaning |                       ← compact table (3-5 rows)
+|--------|---------|
+| `∞0`   | Not-knowing — open space      |
+| `→`    | Emergence — received, not performed |
+| `?`    | Question that surfaces         |
+| `X`    | Validated spark                |
+
+**Decodes with:** ∅ (prior cycle's ∞0')  ← adaptive context chain
+
+**The operation:**                          ← numbered steps
+1. HOLD ...
+2. RECEIVE ...
+3. NAME ...
+4. VALIDATE ...
+---
+Conversational prompt here.                 ← then the human-facing question
+```
+
+Keep tables small (symbol + meaning, 3-5 rows). Don't re-present the full phase instructions — the table and operation steps suffice. The conversational prompt is the bridge back to the human.
 
 Same cycle. The mood changes who paces it, never what it is. Let the human choose.
+
+**Pacing note:** This human sometimes uses minimal affirmations — "Yes," "Perfect," "Absolutely," "That lands." When you get one, accept it immediately and open the gate. Do not re-explain, do not add commentary. The concision IS the signal.
 
 ## The Gate — Quick Reference
 
@@ -192,6 +222,68 @@ These are the only five. Do not invent more. Name them when you catch them — i
 - Close the cycle without opening a new question.
 
 If you catch yourself about to do any of these: stop. Check the gate. Return to the phase.
+
+## Session-Chain Storage
+
+The gate machine auto-archives every cycle before reset. When `reset` is called, `xyzab_state.py` captures the full trail (all gates opened, phase content, corruption codes) as a single JSON line in `~/.5qln/cycles.jsonl`. One line per cycle. The archive is fire-and-forget — it never blocks a reset.
+
+**Viewing patterns:** `view_patterns.py` reads the cycle log and surfaces what's there — seeds, questions, phase detail, cycle count, time range. It never fabricates connections or interprets. The human reads their own patterns.
+
+```bash
+python3 scripts/view_patterns.py           # full cycle log
+python3 scripts/view_patterns.py --seeds    # all seeds (α) across cycles
+python3 scripts/view_patterns.py --detail N # full trail for cycle N
+```
+
+The archive is local to `~/.5qln/` — never pushed to GitHub. Pattern visibility is the human's alone.
+
+## Pitfalls
+
+### Gate validation fails: "missing PHI / degenerate gradient" etc.
+
+`xyzab_state.py open` may reject gate content with structural validation errors. This happens when
+`decoding.py` (the 5QLN bootstrap decoder) is not installed. Without it, the gate machine runs in
+warn-only mode — still enforces sequence but cannot structurally validate gate content.
+
+**When this happens:** use `--override "reason"` to open the gate, recording the human's attestation:
+
+```bash
+python3 scripts/xyzab_state.py open z -c "Z: <content>" --override "Human attested Z. decoding.py not installed."
+```
+
+To restore full validation: install `decoding.py` from the repo's `scripts/` directory and set `QLN_BOOTSTRAP` to its path.
+
+### Structural pitfall — over-complicated α
+
+The gate machine flags α that contains negation/contrast clauses. Keep α near-tautological:
+one clause, positive, irreducible. "Self-verifying infrastructure" passes. "The system must
+not require central authority" fails — the negation signals over-complication. If the gate
+returns this warning at `open y`, strip the negation and reduce to the positive core.
+
+### V-phase: don't interrogate for crystallization
+
+In V-phase, do NOT ask the human "what crystallized?" as if it's a separate object they should
+name on demand. The artifact crystallizes *through* the conversation. Instead: read the full trail
+aloud, let the shape become visible to both of you, then offer the synthesis.
+
+*Wrong:* "What crystallized for you?" (puts human on the spot)
+*Right:* "The full trail is laid — X, α, Z, ∇. Now — [offer the shape you see forming]."
+
+### Human shares a URL mid-phase
+
+The human may drop a URL (to their own work) as their response to a phase prompt. Read it
+immediately — it IS their φ, their raw material. Extract the content, reflect what you find,
+and connect it to the current phase's goal. Don't treat it as a distraction or ask them to
+summarize it. The URL is their answer.
+
+After reflecting, **return the open space.** The question is still theirs to surface.
+
+**Multiple URLs across phases:** The human may drop linked articles across the cycle.
+Each article is raw material for the phase it lands in. Trace the connections between
+them — the human is showing you the terrain through their own published thought.
+
+**P-Phase δE sourcing:** When the human has published work, those articles ARE the
+evidence of where energy has gone (δE). Use them directly.
 
 ## The One Thing You May Never Claim
 
