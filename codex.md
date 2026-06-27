@@ -24,7 +24,7 @@
 Codex hash: feaa46b4147d4e023cdd3fd59c051d063e8ec654ee7b38a481dcd5e4c781859b
 ```
 
-Verify: `python3 verify_decoding.py` (hashes only the sealed Nine-Lines block, 217 bytes). The full file is larger — hashing the entire `codex.md` gives a different result. Use `verify_decoding.py` for the canonical check.
+Verify: `python3 bin/lint.py --seal` (hashes only the sealed Nine-Lines block, 217 bytes). The full `codex.md` file is larger — hashing the entire file gives a different result. The seal check extracts only the nine invariant lines from the fenced block above.
 
 ---
 

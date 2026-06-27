@@ -73,8 +73,8 @@ cp "${REPO_DIR}/codex.md" "${HERMES_SKILLS}/idk/codex.md"
 echo -e "   ${GREEN}✓${NC} idk → ${HERMES_SKILLS}/idk"
 echo ""
 
-# ── 3. Install the gate machine ───────────────────────────────────────
-echo -e "${BOLD}3. Installing the gate machine${NC}"
+# ── 3. Install the engine and Void subsystem ──────────────────────────
+echo -e "${BOLD}3. Installing the engine and Void subsystem${NC}"
 
 if [ ! -f "${REPO_DIR}/scripts/xyzab_state.py" ]; then
     echo -e "   ${RED}✗${NC} scripts/xyzab_state.py not found — the checkout looks incomplete. Re-clone."
@@ -86,10 +86,14 @@ cp "${REPO_DIR}/scripts/xyzab_state.py" "${HERMES_SKILLS}/idk/scripts/xyzab_stat
 cp "${REPO_DIR}/scripts/decoding.py" "${HERMES_SKILLS}/idk/scripts/decoding.py"
 cp "${REPO_DIR}/scripts/archive_cycle.py" "${HERMES_SKILLS}/idk/scripts/archive_cycle.py"
 cp "${REPO_DIR}/scripts/view_patterns.py" "${HERMES_SKILLS}/idk/scripts/view_patterns.py"
+cp "${REPO_DIR}/scripts/idk_state.py" "${HERMES_SKILLS}/idk/scripts/idk_state.py"
+cp "${REPO_DIR}/scripts/idk_tick.py" "${HERMES_SKILLS}/idk/scripts/idk_tick.py"
+cp "${REPO_DIR}/config.yaml" "${HERMES_SKILLS}/idk/config.yaml"
+cp "${REPO_DIR}/void-posture.md" "${HERMES_SKILLS}/idk/void-posture.md"
 chmod +x "${HERMES_SKILLS}/idk/scripts/xyzab_state.py"
 chmod +x "${HERMES_SKILLS}/idk/scripts/archive_cycle.py"
 chmod +x "${HERMES_SKILLS}/idk/scripts/view_patterns.py"
-echo -e "   ${GREEN}✓${NC} xyzab_state.py + decoding.py + archive_cycle.py + view_patterns.py → ${HERMES_SKILLS}/idk/scripts/"
+echo -e "   ${GREEN}✓${NC} engine (xyzab + decoding + archive + view) + Void (idk_state + idk_tick + config) → ${HERMES_SKILLS}/idk/"
 echo ""
 
 # ── 4. Done ───────────────────────────────────────────────────────────
@@ -102,6 +106,10 @@ echo -e "   ${BOLD}Load the idk skill.${NC}"
 echo -e "   ${BOLD}/idk${NC}"
 echo ""
 echo -e " Then don't reach for a question. Let one come."
+echo ""
+echo -e " Optional — Void watchdog (cron heartbeat that monitors sessions):"
+echo -e "   Configure a cron job to run every 30 minutes:"
+echo -e "   ${BOLD}python3 ${HERMES_SKILLS}/idk/scripts/idk_tick.py${NC}"
 echo ""
 echo -e " Verify the seal independently anytime:"
 echo -e "   python3 ${REPO_DIR}/bin/lint.py --seal"
