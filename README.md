@@ -110,8 +110,9 @@ cycle without a human has been removed — see ARCHITECTURE.md, "What is not her
 feaa46b4147d4e023cdd3fd59c051d063e8ec654ee7b38a481dcd5e4c781859b
 ```
 
-This hash seals the 217-byte Codex — nothing else. Every genuine 5QLN surface
-carries it. → [5qln.com/codex](https://www.5qln.com/codex/)
+This hash seals the 217-byte Codex — nothing else. Every compiled surface
+carries it; the Codex itself is the source, not a surface.
+→ [5qln.com/codex](https://www.5qln.com/codex/)
 
 ---
 

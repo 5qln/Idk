@@ -22,7 +22,8 @@ If the human immediately states a formed question, switch to Functional S: `[S-P
 | `/idk fragment <text>` | Add raw expression to buffer. |
 | `/idk reflect` | Agent mirrors fragments. Never names the seed. |
 | `/idk deepen` | Agent asks one question behind the fragments. |
-| `/idk crystallize <X>` | Validate X. Close Void. Open gate x. |
+| `/idk output` | Record one agent response made in Void. Feeds the L4 detector. |
+| `/idk crystallize <X>` | Validate X against the gate. Close Void, open gate x. (`--override` records a deliberate bypass.) |
 | `/idk release` | Close Void without crystallization. Legitimate abort. |
 | `/idk status` | Buffer size, time in Void, corruption flags. |
 
@@ -41,6 +42,7 @@ If the human immediately states a formed question, switch to Functional S: `[S-P
 - Proposing α, naming the seed → **L2** (generating)
 - "This feels like..." / "I sense..." → **L3** (claiming ∞0)
 - 3+ substantive responses without human fragment input → **L4** (performing)
+  (record each response with `/idk output`; a human `/idk fragment` resets the count)
 
 ### Self-Check (Every Response in Void)
 
