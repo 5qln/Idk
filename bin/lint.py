@@ -20,10 +20,18 @@ WHAT THIS IS NOT
 
       Form only. Never life.
 
+  The Codex is the SOURCE of the grammar, not a surface compiled from it.
+  It defines ∞0'; it does not pose one. So the surface contract does not
+  apply to it. The linter auto-detects the Codex (the nine-line block hashes
+  to the seal) and exempts it; --source (or --allow-source) forces that
+  treatment for a draft.
+
 USAGE
   python3 bin/lint.py --seal              verify the Codex seal
   python3 bin/lint.py path/to/surface.md  form-check a surface
   python3 bin/lint.py --seal surface.md   do both
+  python3 bin/lint.py --source codex.md   form-check the Codex *source*
+  python3 bin/lint.py --source draft.md   form-check a draft as source
   cat surface.md | python3 bin/lint.py -  form-check stdin
 
 EXIT
@@ -84,10 +92,27 @@ def verify_seal():
     return False
 
 
+def is_codex_source(text):
+    """True iff this text IS the sealed Codex: it contains the nine-line block
+    and that block is byte-identical to the seal. This is what tells the
+    *source* apart from a compiled *surface* — and it is principled, not a
+    filename guess. Only the real Codex can pass it."""
+    m = re.search(r"## Nine Invariant Lines\n\n```\n(.*?)\n```(?:\n|$)", text, re.S)
+    if not m:
+        return False
+    block = (m.group(1) + "\n").encode("utf-8")
+    return hashlib.sha256(block).hexdigest() == CODEX_HASH
+
+
 # ── Surface form-check (FORM ONLY) ───────────────────────────────────────
 
-def check_surface(text):
-    """Does this surface CARRY the grammar? Structural checks only."""
+def check_surface(text, source=False):
+    """Does this surface CARRY the grammar? Structural checks only.
+
+    When source=True the file IS the Codex — the grammar's origin, not a
+    surface compiled from it. The surface contract "∞0' must be followed by a
+    return question" does not apply to the file that *defines* ∞0', so that one
+    check is skipped. Identity is then guaranteed by --seal, not this form-check."""
     issues = []
 
     # The constitutional ground.
@@ -113,7 +138,7 @@ def check_surface(text):
     # NOT and cannot judge whether the question is alive.
     if "∞0'" not in text:
         issues.append("missing ∞0' — a surface must open a return question")
-    else:
+    elif not source:
         tail = text[text.rindex("∞0'"):]
         if "?" not in tail:
             issues.append("∞0' present but no return question follows it "
@@ -122,8 +147,18 @@ def check_surface(text):
     return issues
 
 
-def lint_surface(text, label):
-    issues = check_surface(text)
+def lint_surface(text, label, source=False):
+    issues = check_surface(text, source=source)
+    if source:
+        if not issues:
+            print(f"source ({label}): IS the Codex — the grammar's source, not "
+                  f"a surface. The surface contract does not apply; run --seal "
+                  f"to verify identity.")
+            return True
+        print(f"source ({label}): {len(issues)} form issue(s):")
+        for i in issues:
+            print(f"  · {i}")
+        return False
     if not issues:
         print(f"surface ({label}): carries the grammar. "
               f"(Form only — whether the gap opened is the human's to attest.)")
@@ -139,7 +174,9 @@ def lint_surface(text, label):
 def main(argv):
     args = argv[1:]
     do_seal = "--seal" in args
-    files = [a for a in args if a != "--seal"]
+    force_source = "--source" in args or "--allow-source" in args
+    files = [a for a in args
+             if a not in ("--seal", "--source", "--allow-source")]
 
     if not do_seal and not files:
         print(__doc__.strip().split("\n\n")[0])
@@ -154,14 +191,18 @@ def main(argv):
         ok = verify_seal() and ok
     for f in files:
         if f == "-":
-            ok = lint_surface(sys.stdin.read(), "stdin") and ok
+            text = sys.stdin.read()
+            ok = lint_surface(text, "stdin",
+                              source=force_source or is_codex_source(text)) and ok
         else:
             p = Path(f)
             if not p.is_file():
                 print(f"surface ({f}): file not found.")
                 ok = False
                 continue
-            ok = lint_surface(p.read_text(encoding="utf-8"), f) and ok
+            text = p.read_text(encoding="utf-8")
+            ok = lint_surface(text, f,
+                              source=force_source or is_codex_source(text)) and ok
 
     return 0 if ok else 1
 

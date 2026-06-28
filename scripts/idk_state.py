@@ -139,6 +139,9 @@ def cmd_fragment(cfg: dict, text: str):
         "time": datetime.now(timezone.utc).isoformat(),
         "text": text,
     })
+    # A human fragment breaks the agent's output streak. The L4 detector counts
+    # consecutive agent outputs *without* human input, so fresh input resets it.
+    state["agent_outputs_in_void"] = 0
     save_state(cfg, state)
     print(json.dumps({"ok": True, "action": "fragment_added", "count": len(state["fragments"])}))
 
@@ -178,7 +181,36 @@ def cmd_deepen(cfg: dict):
     print(json.dumps(output, indent=2, default=str))
 
 
-def cmd_crystallize(cfg: dict, x: str):
+def cmd_output(cfg: dict):
+    """Record one substantive agent response made while in the Void.
+
+    This is the hook the L4 (performing) detector needs: 'agent_outputs_in_void'
+    was initialised, reset, and read everywhere but incremented nowhere, so the
+    threshold could never trip. The agent calls this once per Void-mode reply.
+
+    Honest limit: this is a self-report. An agent already in L4 drift may stop
+    calling it. The counter raises the floor on detection; it is not a ceiling.
+    A human '/idk fragment' resets it (see cmd_fragment); 'open' resets it too."""
+    state = load_state(cfg)
+    if not state["active"]:
+        print(json.dumps({"ok": False, "error": "void_not_active"}))
+        return
+    state["agent_outputs_in_void"] = state.get("agent_outputs_in_void", 0) + 1
+    save_state(cfg, state)
+    threshold = cfg.get("max_agent_outputs_in_void", 3)
+    flagged = state["agent_outputs_in_void"] >= threshold
+    print(json.dumps({
+        "ok": True,
+        "action": "output_recorded",
+        "agent_outputs_in_void": state["agent_outputs_in_void"],
+        "threshold": threshold,
+        "l4_risk": flagged,
+        "note": ("L4 (performing): you are generating without human fragment "
+                 "input. Stop. Return the space.") if flagged else None,
+    }))
+
+
+def cmd_crystallize(cfg: dict, x: str, override: bool = False):
     state = load_state(cfg)
     if not state["active"]:
         print(json.dumps({"ok": False, "error": "void_not_active"}))
@@ -207,8 +239,41 @@ def cmd_crystallize(cfg: dict, x: str):
                 "xyzab_gate_x": xyzab_result,
             }, indent=2, default=str))
             return
+    else:
+        # Integration is OFF. This is the fail-safe: turning integration off in
+        # config must NOT be enough to silently bypass the gate when a gate
+        # machine is actually present — that would close the Void with nothing
+        # validating the spark, the exact silent bypass this guards against.
+        gate_present = _find_xyzab() is not None
+        if gate_present and not override:
+            print(json.dumps({
+                "ok": False,
+                "action": "crystallize_blocked",
+                "X": x,
+                "reason": "gate_bypass_refused",
+                "detail": ("xyzab_integration is off, but a gate machine is "
+                           "present. Crystallizing now would close the Void "
+                           "without the gate validating the spark."),
+                "hint": ("Re-enable xyzab_integration in config.yaml, or pass "
+                         "--override to record a deliberate human decision to "
+                         "crystallize without the gate."),
+                "void": "still open — nothing lost",
+            }, indent=2, default=str))
+            return
+        if gate_present and override:
+            state.setdefault("corruption_flags", []).append({
+                "code": "gate_bypass",
+                "time": datetime.now(timezone.utc).isoformat(),
+                "detail": ("Crystallized with xyzab_integration off via "
+                           "--override; gate present but not consulted."),
+            })
+            xyzab_result = {"opened": None, "bypassed": True,
+                            "note": "gate present but bypassed by --override"}
+        else:
+            xyzab_result = {"opened": None, "gate_not_present": True,
+                            "note": "no gate machine reachable; Void ran standalone"}
 
-    # Gate opened (or integration disabled): the crossing is real. Close Void.
+    # The crossing is real (gate opened, human-overridden, or standalone). Close Void.
     state["crystallized_x"] = x
     state["active"] = False
     if cfg.get("auto_log_fragments"):
@@ -332,7 +397,7 @@ if __name__ == "__main__":
     cfg = load_config()
     args = sys.argv[1:]
     if not args:
-        print("Usage: idk_state.py <open|fragment|reflect|deepen|crystallize|release|status|close> [args]")
+        print("Usage: idk_state.py <open|fragment|reflect|deepen|output|crystallize|release|status|close> [args]")
         sys.exit(1)
 
     cmd = args[0]
@@ -344,8 +409,16 @@ if __name__ == "__main__":
         cmd_reflect(cfg)
     elif cmd == "deepen":
         cmd_deepen(cfg)
+    elif cmd == "output":
+        cmd_output(cfg)
     elif cmd == "crystallize" and len(args) > 1:
-        cmd_crystallize(cfg, " ".join(args[1:]))
+        rest = args[1:]
+        override = "--override" in rest
+        x = " ".join(a for a in rest if a != "--override")
+        if not x:
+            print(json.dumps({"ok": False, "error": "crystallize requires X (a question)"}))
+            sys.exit(1)
+        cmd_crystallize(cfg, x, override=override)
     elif cmd == "release":
         cmd_release(cfg)
     elif cmd == "status":
