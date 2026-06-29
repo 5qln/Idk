@@ -321,6 +321,9 @@ The cycle trail document format (X, α, raw material, Z, ∇, B'', ∞0') is
 documented in `references/cycle-trail-format.md` — use it as a template when
 producing a trail artifact.
 
+**Membrane rule:** The full trail is a private certificate. Only X crosses
+the membrane into public visibility. See `references/public-vs-private-artifacts.md`.
+
 Then:
 
 ```bash
