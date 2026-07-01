@@ -1,4 +1,23 @@
 __pycache__/
 *.pyc
+*.pyo
 .DS_Store
-~/.5qln/
+.5qln/            # local /idk state (gitignore never expands ~, so anchor it)
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# Python virtualenvs
+.venv/
+venv/
+
+# Test / type-checker caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Misc
+.env
+*.log

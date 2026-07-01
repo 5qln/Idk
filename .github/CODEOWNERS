@@ -1,0 +1,8 @@
+# Default owner for everything. Replace @5qln with the maintainer's GitHub
+# handle (or an @org/team) so reviews are auto-requested.
+*                       @5qln
+
+# Identity-critical surfaces — review with extra care.
+/codex.md               @5qln
+/bin/                   @5qln
+/.github/               @5qln

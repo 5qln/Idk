@@ -115,10 +115,10 @@ articulate chatbot that performs depth while producing succession."
 
 ---
 
-## 4. Why one skill holds all three modes
+## 4. Why one skill holds all four moods
 
 The single most-asked question about the old repo: there were separate skills and
-tools for step-by-step mode and for sub-phase fractal descent — how can one skill
+tools for step-by-step mode and for sub-phase fractal descent (now the Step-by-step and Commutation moods) — how can one skill
 replace them?
 
 Because, by the Codex's own law, they were never separate things:
@@ -131,7 +131,7 @@ Because, by the Codex's own law, they were never separate things:
   something resists.
 - **Decode** presents the formal 5QLN language alongside the conversation —
   equation, symbol table, and decoding operation at each phase change.
-- **Fractal** — the vertical (cycles within a cell) and the horizontal (the
+- **Commutation** (the fractal mood) — the vertical (cycles within a cell) and the horizontal (the
   twenty-five-lens ring) — is the single Holographic Law `XY := X within Y` turned
   inward. The same cell, repeated at a finer grain.
 
@@ -149,7 +149,7 @@ the Codex never asked for.
 > consistent with the Codex but is proposed, not derived. It is the first thing to
 > pressure-test.
 
-For one stance to hold both modes, it must read **one** live signal — the thing
+For one stance to hold all four moods, it must read **one** live signal — the thing
 that tells it, moment to moment, whether to hold or move, whether to descend or
 move on. That signal is **current**: the presence or absence of genuine aliveness
 in what the human is saying. (The Codex names its absence directly — L4 is "going
