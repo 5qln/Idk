@@ -4,7 +4,7 @@ The `/idk` skill and its session-chain tools live across two GitHub identities:
 
 | Identity | Role | Auth |
 |----------|------|------|
-| `5qln` (org) | **Source of truth** — `5qln/Idk`, `5qln/Installer-for-Hermes` | Separate SSH key (`~/.ssh/id_ed25519_5qln`, Host `github.com-5qln`) |
+| `5qln` (org) | **Source of truth** — `5qln/Idk`, `5qln/Questions`, `5qln/Idk-commons` | Separate SSH key (`~/.ssh/id_ed25519_5qln`, Host `github.com-5qln`) |
 | `qlnlife` (personal) | **Backup mirror** — `qlnlife/Idk`, `qlnlife/Hermes5BU` | Default SSH key (`~/.ssh/id_ed25519`) |
 
 ## What goes where
@@ -88,7 +88,7 @@ The qlnlife key (default `github.com` host) has NO access to 5qln org repos. Usi
 
 **Rule:** Match the host alias to the account:
 - `github.com` → qlnlife (articles, Hermes5BU)
-- `github.com-5qln` → 5qln (code, Idk, Installer-for-Hermes)
+- `github.com-5qln` → 5qln (code, Idk, Questions, Idk-commons)
 
 **Before pushing, verify the remote URL matches the right host alias.**
 If the remote is `git@github.com:qlnlife/...` but you're using the 5qln key, the
