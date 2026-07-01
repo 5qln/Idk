@@ -4,7 +4,7 @@ idk_tick.py — /idk Void heartbeat for Hermes cron
 
 Called by cron when /idk is active. Checks:
   1. Void open > max_void_hours? → flag for human surfacing
-  2. Agent outputs > max_agent_outputs_in_void? → flag L4
+  2. Agent outputs >= max_agent_outputs_in_void? → flag L4
   3. Buffer unchanged for >6 hours? → gentle check-in
 
 Output format:
@@ -20,58 +20,9 @@ import sys
 from pathlib import Path
 from datetime import datetime, timezone
 
-
-def config_path() -> Path:
-    env = os.environ.get("IDK_CONFIG")
-    if env:
-        return Path(env)
-    here = Path(__file__).resolve().parent.parent
-    return here / "config.yaml"
+from config import load_idk_config
 
 
-def load_config() -> dict:
-    defaults = {
-        "idk": {
-            "max_void_hours": 24,
-            "max_agent_outputs_in_void": 3,
-            "state_dir": str(Path.home() / ".5qln"),
-        }
-    }
-    cp = config_path()
-    if cp.is_file():
-        try:
-            loaded = _parse_simple_yaml(cp)
-            if loaded and "idk" in loaded:
-                defaults["idk"].update(loaded["idk"])
-        except Exception:
-            pass
-    return defaults["idk"]
-
-
-def _parse_simple_yaml(path: Path) -> dict:
-    """Parse a simple flat YAML config without PyYAML dependency."""
-    result = {}
-    current_section = None
-    with open(path) as fh:
-        for line in fh:
-            stripped = line.strip()
-            if not stripped or stripped.startswith("#"):
-                continue
-            if not line.startswith(" ") and stripped.endswith(":"):
-                current_section = stripped[:-1]
-                result[current_section] = {}
-            elif current_section and ":" in stripped:
-                key, _, val = stripped.partition(":")
-                key = key.strip()
-                val = val.strip()
-                if val.lower() == "true":
-                    val = True
-                elif val.lower() == "false":
-                    val = False
-                elif val.isdigit():
-                    val = int(val)
-                result[current_section][key] = val
-    return result
 
 
 def state_file(cfg: dict) -> Path:
@@ -88,7 +39,7 @@ def load_state(cfg: dict) -> dict:
 
 
 def main():
-    cfg = load_config()
+    cfg = load_idk_config()
     state = load_state(cfg)
     if not state.get("active"):
         print("[SILENT]")
@@ -108,7 +59,7 @@ def main():
             })
 
     outputs = state.get("agent_outputs_in_void", 0)
-    if outputs > cfg["max_agent_outputs_in_void"]:
+    if cfg.get("corruption_checks", True) and outputs >= cfg["max_agent_outputs_in_void"]:
         alerts.append({
             "type": "L4_risk",
             "agent_outputs": outputs,

@@ -90,9 +90,7 @@ cp "${REPO_DIR}/scripts/idk_state.py" "${HERMES_SKILLS}/idk/scripts/idk_state.py
 cp "${REPO_DIR}/scripts/idk_tick.py" "${HERMES_SKILLS}/idk/scripts/idk_tick.py"
 cp "${REPO_DIR}/config.yaml" "${HERMES_SKILLS}/idk/config.yaml"
 cp "${REPO_DIR}/void-posture.md" "${HERMES_SKILLS}/idk/void-posture.md"
-chmod +x "${HERMES_SKILLS}/idk/scripts/xyzab_state.py"
-chmod +x "${HERMES_SKILLS}/idk/scripts/archive_cycle.py"
-chmod +x "${HERMES_SKILLS}/idk/scripts/view_patterns.py"
+chmod +x "${HERMES_SKILLS}"/idk/scripts/*.py   # all six scripts have shebangs
 echo -e "   ${GREEN}✓${NC} engine (xyzab + decoding + archive + view) + Void (idk_state + idk_tick + config) → ${HERMES_SKILLS}/idk/"
 echo ""
 

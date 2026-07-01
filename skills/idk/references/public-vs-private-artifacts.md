@@ -58,5 +58,5 @@ The trail connecting them is private. Only the questions are public.
 ## See Also
 
 - `cycle-trail-format.md` — Full private trail template
-- [[research/25-commutations-trail-commons]] — The 5×5 fractal decode
-- [[research/agent-native-architecture-research]] — Agent-native architecture
+- [25-commutations](./25-commutations.md) — The 5×5 fractal decode
+- [trail-commons-architecture](./trail-commons-architecture.md) — Agent-native architecture

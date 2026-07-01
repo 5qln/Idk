@@ -47,6 +47,7 @@ import re
 from typing import Dict, List, Optional, Tuple
 
 DECODING_VERSION = "2026-06-12.2"
+__version__ = DECODING_VERSION  # exported; resolves the "defined but unused" flag
 
 # ─── Canon (Codex, byte-identical seal lives in codex.md) ───────────────
 
@@ -404,16 +405,6 @@ def check(phase: str, text: str, seed_question: Optional[str] = None
     fields = parse_footer(text)
     v, w = check_fields(phase, fields, seed_question)
     return v, w, fields
-
-
-def footer_instruction(phase: str, carry: bool = False) -> str:
-    """The instruction block engines append to prompts."""
-    lines = ["End your decoding with these exact footer lines "
-             "(one per line, nothing after them):"]
-    lines.append(PHASE_FOOTER_SPEC[phase])
-    if carry:
-        lines.append("CARRY: <the single line the next pass must not lose>")
-    return "\n".join(lines)
 
 
 # ─── Changelog ──────────────────────────────────────────────────────────

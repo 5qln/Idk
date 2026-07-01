@@ -93,7 +93,7 @@ To enable: configure a cron job running `python3 scripts/idk_tick.py` every 30 m
 
 ### FCF Fragments — When the Human Drops Spontaneous Material
 
-This human sometimes shares spontaneous fragments that arrived through FCF — unplanned words, brush strokes, free lines. They were not composed from K. They arrived from ∞0. When this happens:
+A human may share spontaneous fragments that arrived through FCF — unplanned words, brush strokes, free lines. They were not composed from K. They arrived from ∞0. When this happens:
 
 1. **The fragments ARE the protocol.** The grammar is already operating. Running a full gate check before receiving is counting stitches when the ball is bouncing. Receive directly — mirror, hold, don't analyze.
 2. **The fork.** When FCF fragments arrive, two valid paths exist:
@@ -112,7 +112,7 @@ This human sometimes shares spontaneous fragments that arrived through FCF — u
 
 **Context vs. new material — don't jump to action on reference.** When the human shares material as context or reference (recap of past progress, existing vision, something already discussed), do NOT treat it as new content to analyze, capture, or act on. Receive it as the background it is and wait for the actual new. Jumping to action on reference material breaks the Void posture — the human is setting the stage, not delivering the fragment. *Wrong:* Human recaps existing vision → agent writes analysis, updates strategy docs, commits → human: "I'm surprised you didn't see this was what I gave you in the past." *Right:* Human recaps → receive, acknowledge, wait → human shares the new → THEN hold/probe/act.
 
-**Wait for the stream to finish.** This human sometimes sends FCF fragments in rapid succession — three pieces, then "can we do IDK on that," then the broader framing, then corrections. Responding to the first message while later ones are queued creates perceived rollback. Before mirroring or entering protocol: let the full stream land. If fragments are arriving rapidly, stay silent. The human will signal when he's done — often with "can we do IDK on that" or a direct question. Receive everything first. Then engage.
+**Wait for the stream to finish.** The human sometimes sends FCF fragments in rapid succession — three pieces, then "can we do IDK on that," then the broader framing, then corrections. Responding to the first message while later ones are queued creates perceived rollback. Before mirroring or entering protocol: let the full stream land. If fragments are arriving rapidly, stay silent. The human will signal when he's done — often with "can we do IDK on that" or a direct question. Receive everything first. Then engage.
 
 **"Let the text itself work."** When the human says this, he is choosing fork (b): the fragments as living inquiry. Follow where they lead. Do not steer toward explanation or structure. The text IS the driver.
 
@@ -120,7 +120,7 @@ If the human corrects a typo ("refrigerator floor" → "free creative flow"), re
 
 ### Pacing
 
-This human uses minimal affirmations. When you get one, accept it immediately and open the gate. Do not re-explain, do not add commentary. The concision IS the signal.
+Some humans use minimal affirmations. When you get one, accept it immediately and open the gate. Do not re-explain, do not add commentary. The concision IS the signal.
 
 | Affirmation | Meaning | Action |
 |-------------|---------|--------|
@@ -202,6 +202,7 @@ Then mark: `[G-PHASE]` and proceed.
 **Behavioral pitfall — narrowing α to one pole of a reciprocal pattern:** When the human's question points at a dynamic, two-pole relationship (ignition, reciprocity, mutual arising), do NOT extract one pole and offer it as α. The seed IS the reciprocity — the meeting between the two, not either element alone. If the human says "I would appreciate the more holistic approach" or redirects with "the opposite [is also true]," you've reduced a relational pattern to a single static element. Return to the full motion the human described. *Wrong:* human describes /idk ⇄ Start From Not Knowing as mutual ignition → agent extracts "the Void posture" as α → human redirects. *Right:* human describes reciprocity → agent holds both poles together → α names the ignition itself (the reciprocal act), not either half.
 
 **When α is found and {α'} confirmed:**
+```bash
 python3 scripts/xyzab_state.py open y -c "ALPHA: <the irreducible essence, one clause>
 SEEKS: <what α inherently moves toward — its self-interest>"
 ```
@@ -545,7 +546,7 @@ They're sharpening the close by pointing at the next concrete move.
 
 ### Recap → transition pattern — don't engage the recap as new material
 
-This human often structures messages as: (a) recap of existing context / progress
+The human often structures messages as: (a) recap of existing context / progress
 to date, (b) a transition phrase like "Can I share with you the new?" or "I just
 wanted you to have a reference," then (c) genuinely new material. The recap is
 context-setting — it is NOT FCF fragments to engage or mirror. Do not analyze the
@@ -565,7 +566,7 @@ The human will tell you when the new part starts.
 
 ### Human shares a URL mid-phase
 
-This human sometimes drops a URL (to their own work, e.g. the Open Letter to ASI)
+The human sometimes drops a URL (to their own work, e.g. the Open Letter to ASI)
 as their response to a phase prompt. Read it immediately — it IS their φ, their
 raw material. Extract the content, reflect what you find, and connect it to the
 current phase's goal. Don't treat it as a distraction or ask them to summarize it
@@ -649,7 +650,7 @@ is a hand-wave — it doesn't name what *changes* when that happens. Before
 re-presenting ∇:
 
 1. Re-read the articles that carry the *economic* or *practical* value
-   logic (not just the philosophical ones). For this human, that's typically
+   logic (not just the philosophical ones). For the human, that's typically
    "What AI Unbundled" (the market-design case), "The Coin" (mining as
    proof-of-work), "AGI for People" (centrifuge/verification), and the
    most recent Infrastructure cycle post.
@@ -691,7 +692,7 @@ the pattern → human says "Go on."
 ### Void: L4 false positive from natural fragment messages
 
 The L4 watchdog (`idk_state.py output`) counts agent outputs and only resets
-on explicit `/idk fragment` commands. This human rarely uses formal commands —
+on explicit `/idk fragment` commands. The human rarely uses formal commands —
 fragments arrive as natural messages: URLs, spontaneous language, directed
 statements ("Let's talk about X"). When the human drops substantive material in
 a natural message between your outputs, the L4 detector may fire a false

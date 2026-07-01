@@ -25,69 +25,15 @@ Commands:
 import json
 import os
 import sys
-import time
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import Optional
 
-
-def config_path() -> Path:
-    """Locate config.yaml relative to this script or via env."""
-    env = os.environ.get("IDK_CONFIG")
-    if env:
-        return Path(env)
-    here = Path(__file__).resolve().parent.parent
-    return here / "config.yaml"
+from config import (
+    config_path, load_idk_config, parse_simple_yaml, atomic_write_json,
+)
 
 
-def load_config() -> dict:
-    """Load config, with defaults for anything missing."""
-    defaults = {
-        "idk": {
-            "max_void_hours": 24,
-            "max_agent_outputs_in_void": 3,
-            "auto_log_fragments": True,
-            "xyzab_integration": True,
-            "corruption_checks": True,
-            "inquiry_field_path": str(Path.home() / ".5qln" / "inquiry-field"),
-            "state_dir": str(Path.home() / ".5qln"),
-        }
-    }
-    cp = config_path()
-    if cp.is_file():
-        try:
-            loaded = _parse_simple_yaml(cp)
-            if loaded and "idk" in loaded:
-                defaults["idk"].update(loaded["idk"])
-        except Exception:
-            pass
-    return defaults["idk"]
-
-
-def _parse_simple_yaml(path: Path) -> dict:
-    """Parse a simple flat YAML config without PyYAML dependency."""
-    result = {}
-    current_section = None
-    with open(path) as fh:
-        for line in fh:
-            stripped = line.strip()
-            if not stripped or stripped.startswith("#"):
-                continue
-            if not line.startswith(" ") and stripped.endswith(":"):
-                current_section = stripped[:-1]
-                result[current_section] = {}
-            elif current_section and ":" in stripped:
-                key, _, val = stripped.partition(":")
-                key = key.strip()
-                val = val.strip()
-                if val.lower() == "true":
-                    val = True
-                elif val.lower() == "false":
-                    val = False
-                elif val.isdigit():
-                    val = int(val)
-                result[current_section][key] = val
-    return result
 
 
 def state_file(cfg: dict) -> Path:
@@ -113,8 +59,7 @@ def load_state(cfg: dict) -> dict:
 
 
 def save_state(cfg: dict, state: dict):
-    with open(state_file(cfg), "w") as fh:
-        json.dump(state, fh, indent=2, default=str)
+    atomic_write_json(state_file(cfg), state, indent=2, default=str)
 
 
 def cmd_open(cfg: dict):
@@ -394,7 +339,7 @@ def _open_xyzab_gate_x(x: str) -> dict:
 
 
 if __name__ == "__main__":
-    cfg = load_config()
+    cfg = load_idk_config()
     args = sys.argv[1:]
     if not args:
         print("Usage: idk_state.py <open|fragment|reflect|deepen|output|crystallize|release|status|close> [args]")
