@@ -446,11 +446,11 @@ python3 scripts/xyzab_state.py open z -c "Z: <content>" --override "Human attest
 The override is recorded on the gate. The gate machine's sequence enforcement
 continues to work — only the structural form-check is bypassed.
 
-**To restore full validation:** install `decoding.py` from either source and
-set `QLN_BOOTSTRAP` to the directory containing it:
+**To restore full validation:** install `decoding.py` from the canonical source
+and set `QLN_BOOTSTRAP` to the directory containing it:
 - `https://github.com/5qln/Idk` → `scripts/decoding.py` (canonical home)
-- `https://github.com/5qln/Installer-for-Hermes` → `bootstrap/decoding.py` **Persist the env var**
-in the profile's `.env` so future sessions find it:
+
+Persist the env var in the profile's `.env` so future sessions find it:
 
 ```bash
 echo 'QLN_BOOTSTRAP=/opt/data/skills/idk/scripts' >> $HERMES_HOME/.env

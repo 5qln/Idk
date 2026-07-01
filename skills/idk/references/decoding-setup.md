@@ -10,17 +10,11 @@ footer format it expects.
 
 ## Source
 
-The canonical home is `5qln/Idk` → `scripts/decoding.py`. It was originally
-developed in `5qln/Installer-for-Hermes` and migrated to Idk in Cycle 13
-(June 2026) to keep the gate machine and validator in one repo.
+The canonical home is `5qln/Idk` → `scripts/decoding.py`.
 
 ```bash
 # Install from canonical source
 curl -sL https://raw.githubusercontent.com/5qln/Idk/main/scripts/decoding.py \
-  -o /opt/data/skills/idk/scripts/decoding.py
-
-# Fallback (legacy source)
-curl -sL https://raw.githubusercontent.com/5qln/Installer-for-Hermes/main/bootstrap/decoding.py \
   -o /opt/data/skills/idk/scripts/decoding.py
 ```
 

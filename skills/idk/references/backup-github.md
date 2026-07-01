@@ -26,7 +26,7 @@ Idk/
 ├── bin/lint.py
 ├── scripts/
 │   ├── xyzab_state.py      # gate machine + auto-archive on reset
-│   ├── decoding.py          # canonical phase decoder (from Installer-for-Hermes)
+│   ├── decoding.py          # canonical phase decoder
 │   ├── idk_state.py         # Void posture state machine
 │   └── idk_tick.py          # Void posture tick engine
 └── skills/idk/
