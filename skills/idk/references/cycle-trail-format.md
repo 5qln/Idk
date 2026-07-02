@@ -101,9 +101,3 @@ Only when ∇ specifically points to "publish a trail" or "the inhabitation IS
 the articulation." Not every cycle produces a trail artifact — only those
 where the gradient reveals that description has exhausted itself and the next
 move is demonstration.
-
-## Example
-
-Cycle 23 (June 2026) — the first trail published under this format. The
-artifact at `/opt/data/cache/cycle-23-trail.md` was produced during V-phase
-when the human validated ∇ with "Ok do it."

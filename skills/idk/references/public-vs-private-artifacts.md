@@ -1,6 +1,6 @@
 # Public vs. Private Artifacts — The Membrane at X|α
 
-Cycle 40 established: **only X (the validated question) crosses the membrane.**
+The membrane rule: **only X (the validated question) crosses the membrane.**
 Everything from G-phase onward (α, {α'}, Z, ∇, B'', ∞0') is private.
 
 ## The Membrane

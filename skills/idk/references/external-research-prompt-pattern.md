@@ -32,9 +32,8 @@ Skip external delegation when:
 When you do the research yourself:
 1. Use the same prompt structure (Context → Research Ask → Constraints) as your
    own outline — it keeps the thinking organized.
-2. Write the research as a document in the 5qln-wiki (under `research/`).
-3. Cross-link from the existing strategy docs.
-4. The research IS the B'' — deliver it as the cycle artifact.
+2. Capture the research as a document alongside the cycle's other artifacts.
+3. The research IS the B'' — deliver it as the cycle artifact.
 
 ## Prompt structure
 
@@ -57,7 +56,7 @@ Numbered sections, each with a clear goal:
 
 ### 3. Constraints to encode
 - What's ruled out (e.g., "no web embedding — install-based only")
-- Audience priority (e.g., "parents are the hook, but maybe educators are the channel")
+- Audience priority (e.g., which audience is the hook vs. the channel)
 - Depth vs. reach preference
 - Any voice/credibility dilemmas from the cycle
 
