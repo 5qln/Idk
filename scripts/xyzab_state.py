@@ -220,7 +220,8 @@ def _gate_line(gate: str, state: Dict[str, Any]) -> str:
         c = gs["content"]
         if len(c) > 60:
             c = c[:57] + "..."
-        content_preview = f'  {_dim(f"\"{c}\"")}'
+        quoted = '"' + c + '"'
+        content_preview = f'  {_dim(quoted)}'
     name = GATE_NAMES[gate]
     trans = GATE_TRANSITIONS[gate]
     return f"  [{icon}]  {_bold(gate)} {name} → {trans}{marker}{content_preview}"

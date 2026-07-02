@@ -10,18 +10,12 @@ footer format it expects.
 
 ## Source
 
-The canonical home is `5qln/Idk` → `scripts/decoding.py`. It was originally
-developed in `5qln/Installer-for-Hermes` and migrated to Idk in Cycle 13
-(June 2026) to keep the gate machine and validator in one repo.
+The canonical home is `5qln/Idk` → `scripts/decoding.py`.
 
 ```bash
 # Install from canonical source
 curl -sL https://raw.githubusercontent.com/5qln/Idk/main/scripts/decoding.py \
-  -o /opt/data/skills/idk/scripts/decoding.py
-
-# Fallback (legacy source)
-curl -sL https://raw.githubusercontent.com/5qln/Installer-for-Hermes/main/bootstrap/decoding.py \
-  -o /opt/data/skills/idk/scripts/decoding.py
+  -o ~/.hermes/skills/idk/scripts/decoding.py
 ```
 
 ## Environment
@@ -29,7 +23,7 @@ curl -sL https://raw.githubusercontent.com/5qln/Installer-for-Hermes/main/bootst
 Set `QLN_BOOTSTRAP` to the directory containing `decoding.py`:
 
 ```bash
-echo 'QLN_BOOTSTRAP=/opt/data/skills/idk/scripts' >> /opt/data/.env
+echo 'QLN_BOOTSTRAP=~/.hermes/skills/idk/scripts' >> ~/.hermes/.env
 ```
 
 The gate machine checks these paths in order:
@@ -40,8 +34,8 @@ The gate machine checks these paths in order:
 ## Verification
 
 ```bash
-cd /opt/data/skills/idk
-QLN_BOOTSTRAP=/opt/data/skills/idk/scripts python3 scripts/xyzab_state.py gate
+cd ~/.hermes/skills/idk
+QLN_BOOTSTRAP=~/.hermes/skills/idk/scripts python3 scripts/xyzab_state.py gate
 ```
 
 If `next` is non-null and no import errors, decoding.py is active.

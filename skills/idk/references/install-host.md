@@ -15,20 +15,19 @@ setup.sh does four things:
 3. Installs `scripts/xyzab_state.py` (the gate machine)
 4. Installs `scripts/archive_cycle.py` and `scripts/view_patterns.py` (session-chain storage)
 
-## Host-specific: HERMES_HOME path
+## Custom HERMES_HOME
 
-`HERMES_HOME` is `/opt/data`, not `~/.hermes`. setup.sh defaults to
-`~/.hermes/skills/` unless `HERMES_SKILLS` is set. After running setup.sh,
-copy the skill to the active HERMES_HOME:
+`setup.sh` defaults to `~/.hermes/skills/` unless `HERMES_SKILLS` is set. If your
+`HERMES_HOME` is elsewhere, copy the skill after install:
 
 ```bash
-cp -r ~/.hermes/skills/idk /opt/data/skills/idk
+cp -r ~/.hermes/skills/idk "$HERMES_HOME/skills/idk"
 ```
 
 Or set the env var before setup:
 
 ```bash
-HERMES_SKILLS=/opt/data/skills bash setup.sh
+HERMES_SKILLS="$HERMES_HOME/skills" bash setup.sh
 ```
 
 ## Gate machine state
@@ -64,8 +63,3 @@ python3 scripts/archive_cycle.py --session "project-name"
 ```
 
 Run `reset --no-archive` to skip auto-archive for a given cycle.
-
-## Backup to GitHub
-
-Push the skill directory (SKILL.md, codex.md, scripts, references) to the Hermes5BU
-backup repo. Full workflow in `references/backup-github.md`.

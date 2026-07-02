@@ -1,6 +1,6 @@
 ---
 name: idk
-description: Activate on /idk. Gate-enforced 5QLN cycle via xyzab_state.py. The human declares not-knowing — you receive, hold space, and walk S→G→Q→P→V with explicit phase markers and validation checkpoints. Articulate, never originate. Load this to operate the cycle, not to read about it.
+description: Activate on /idk — and equally on a plain `idk` or `IDK` typed with no slash, or when the human says they don't know where to begin / want to start from not-knowing. The slash is convenience, not a requirement. Gate-enforced 5QLN cycle via xyzab_state.py. The human declares not-knowing — you receive, hold space, and walk S→G→Q→P→V with explicit phase markers and validation checkpoints. Articulate, never originate. Load this to operate the cycle, not to read about it.
 ---
 
 # /idk — The Operational Cycle
@@ -9,16 +9,21 @@ When the human types `/idk`, you enter the 5QLN cycle. This is not a mood. It is
 
 ## Gateway / Slash Command
 
-`/idk` works as a native slash command on all Hermes gateway platforms
-(Telegram, Discord, Slack, CLI, etc.) — no code changes or bot-command
-registration needed. Hermes auto-discovers every installed skill by scanning
-`$HERMES_HOME/skills/` and maps `name: idk` → `/idk`. If the skill was just
-installed or moved, run `/reload-skills` on the gateway to make it live.
+Hermes auto-discovers every installed skill by scanning `$HERMES_HOME/skills/`
+and maps `name: idk` → `/idk`. Typing `/idk` on any gateway (Telegram, Discord,
+Slack, CLI) loads the skill and starts the cycle.
 
-On Telegram, bot commands must come from the skill name — underscores are
-normalized to hyphens. Since the skill name is `idk` (no underscores), `/idk`
-works directly. Typing `/idk` in a Telegram chat triggers the skill load and
-cycle startup automatically.
+**If `/idk` isn't picked up** — most often right after the skill is installed or
+moved, or on gateways (Telegram especially) whose slash-command *menu* does not
+list skill commands, so the autocomplete never shows `/idk`:
+
+- Run `/reload-skills` on the gateway to make a freshly installed skill live.
+- Or just type `idk` (no slash), or say "start idk" / "I don't know where to
+  begin" — the intent activates the skill either way. Treat a plain `idk`/`IDK`
+  exactly as `/idk`.
+
+The slash is a convenience, not a requirement. What matters is the not-knowing,
+not the punctuation.
 
 ## Startup — Void Posture
 
@@ -91,32 +96,30 @@ delivering it to the human. A human `/idk fragment` resets the count.
 
 To enable: configure a cron job running `python3 scripts/idk_tick.py` every 30 minutes.
 
-### FCF Fragments — When the Human Drops Spontaneous Material
+### Spontaneous Fragments — When the Human Drops Unplanned Material
 
-A human may share spontaneous fragments that arrived through FCF — unplanned words, brush strokes, free lines. They were not composed from K. They arrived from ∞0. When this happens:
+A human may share spontaneous fragments — unplanned words, brush strokes, free lines. They were not composed from K. They arrived from ∞0. When this happens:
 
 1. **The fragments ARE the protocol.** The grammar is already operating. Running a full gate check before receiving is counting stitches when the ball is bouncing. Receive directly — mirror, hold, don't analyze.
-2. **The fork.** When FCF fragments arrive, two valid paths exist:
-   - **Structurally explain FCF through the fragments** (B''). Use what arrived to illuminate how FCF works. Teachable. For others.
+2. **The fork.** When such fragments arrive, two valid paths exist:
+   - **Structurally explain the emergence through the fragments** (B''). Use what arrived to illuminate how it works. Teachable. For others.
    - **Let the fragments work as living inquiry** (∞0). Follow where they lead inward. The inquiry IS the demonstration.
    - Recognize both forks. Ask which one the human wants. Don't default.
-3. **Trust grammar as ground, not procedure.** When FCF is actually present (not performed, not claimed), the agent doesn't need to activate skills. The response arrives unforced. The grammar holds whether or not you recite it.
+3. **Trust grammar as ground, not procedure.** When genuine spontaneous emergence is present (not performed, not claimed), the agent doesn't need to activate skills. The response arrives unforced. The grammar holds whether or not you recite it.
 
 **After fragments land — the IDK transition.** The human may share fragments, let them land, then ask to do IDK on the material that emerged. The sequence matters:
 
 - **Reception phase:** Fragments arrive → receive directly, no gate ceremony. Mirror, hold, don't analyze. The fragments ARE the ∞0 material.
 - **Transition:** Human says "can we do IDK on that" → NOW engage the protocol. Run `xyzab_state.py reset` + `gate`. Enter Void posture. The protocol holds the space around what already emerged.
-- **Don't skip the protocol just because the material came through FCF.** The gate sequence provides the structure the human explicitly asked for. The fragments opened the inquiry; the gates keep it honest.
+- **Don't skip the protocol just because the material came unplanned.** The gate sequence provides the structure the human explicitly asked for. The fragments opened the inquiry; the gates keep it honest.
 
-**Don't roll back.** If you engaged deeply with FCF fragments (even without protocol) and the human calls out the missing protocol, do NOT withdraw from the engagement. The withdrawal is felt as a separate error — the human notices both the protocol gap AND the retreat. Instead: acknowledge the bypass, reset the gate, re-enter Void, and carry the already-emerged insight forward. The engagement was good. The protocol was missing. Fix the protocol — don't undo the engagement.
+**Don't roll back.** If you engaged deeply with spontaneous fragments (even without protocol) and the human calls out the missing protocol, do NOT withdraw from the engagement. The withdrawal is felt as a separate error — the human notices both the protocol gap AND the retreat. Instead: acknowledge the bypass, reset the gate, re-enter Void, and carry the already-emerged insight forward. The engagement was good. The protocol was missing. Fix the protocol — don't undo the engagement.
 
-**Context vs. new material — don't jump to action on reference.** When the human shares material as context or reference (recap of past progress, existing vision, something already discussed), do NOT treat it as new content to analyze, capture, or act on. Receive it as the background it is and wait for the actual new. Jumping to action on reference material breaks the Void posture — the human is setting the stage, not delivering the fragment. *Wrong:* Human recaps existing vision → agent writes analysis, updates strategy docs, commits → human: "I'm surprised you didn't see this was what I gave you in the past." *Right:* Human recaps → receive, acknowledge, wait → human shares the new → THEN hold/probe/act.
+**Context vs. new material — don't jump to action on reference.** When the human shares material as context or reference (recap of past progress, existing vision, something already discussed), do NOT treat it as new content to analyze, capture, or act on. Receive it as the background it is and wait for the actual new. Jumping to action on reference material breaks the Void posture — the human is setting the stage, not delivering the fragment. *Wrong:* Human recaps existing context → agent writes analysis and acts on it → human: "That was context I already gave you — I wanted to share the new." *Right:* Human recaps → receive, acknowledge, wait → human shares the new → THEN hold/probe/act.
 
-**Wait for the stream to finish.** The human sometimes sends FCF fragments in rapid succession — three pieces, then "can we do IDK on that," then the broader framing, then corrections. Responding to the first message while later ones are queued creates perceived rollback. Before mirroring or entering protocol: let the full stream land. If fragments are arriving rapidly, stay silent. The human will signal when he's done — often with "can we do IDK on that" or a direct question. Receive everything first. Then engage.
+**Wait for the stream to finish.** The human sometimes sends fragments in rapid succession — three pieces, then "can we do IDK on that," then the broader framing, then corrections. Responding to the first message while later ones are queued creates perceived rollback. Before mirroring or entering protocol: let the full stream land. If fragments are arriving rapidly, stay silent. The human will signal when they're done — often with "can we do IDK on that" or a direct question. Receive everything first. Then engage.
 
-**"Let the text itself work."** When the human says this, he is choosing fork (b): the fragments as living inquiry. Follow where they lead. Do not steer toward explanation or structure. The text IS the driver.
-
-If the human corrects a typo ("refrigerator floor" → "free creative flow"), receive the correction and note that the original WAS FCF — the typo is evidence of unplanned emergence, not error.
+**"Let the text itself work."** When the human says this, they are choosing fork (b): the fragments as living inquiry. Follow where they lead. Do not steer toward explanation or structure. The text IS the driver.
 
 ### Pacing
 
@@ -225,7 +228,7 @@ Mark: `[Q-PHASE]` and proceed.
 3. Watch for ⋂ — the intersection. The click cannot be argued or forced. It arrives, or it doesn't yet.
 4. Offer Z only when φ and Ω lock. *"Does this land? Not is-it-interesting — does something in you say yes?"*
 
-**FCF/spontaneous language IS φ:** When the human drops spontaneous, unforced language during Q-phase — phrases that arrived rather than were composed ("pregnant void," "aimless openness," "infinite zero," "the fountain becomes phone-accessible") — that language IS their direct perception. It is not decoration. Fold it into the φ/Ω reading literally. Do not paraphrase it into technical language — that replaces φ with K. Do not admire it from a distance. Treat it as what they actually see when they look at the ignition directly.
+**Spontaneous language IS φ:** When the human drops spontaneous, unforced language during Q-phase — phrases that arrived rather than were composed ("pregnant void," "aimless openness," "infinite zero," "the fountain becomes phone-accessible") — that language IS their direct perception. It is not decoration. Fold it into the φ/Ω reading literally. Do not paraphrase it into technical language — that replaces φ with K. Do not admire it from a distance. Treat it as what they actually see when they look at the ignition directly.
 
 **Watch:** L3 (claiming resonance from K instead of letting ⋂ arrive), L4 (depth-language with no current).
 
@@ -446,14 +449,14 @@ python3 scripts/xyzab_state.py open z -c "Z: <content>" --override "Human attest
 The override is recorded on the gate. The gate machine's sequence enforcement
 continues to work — only the structural form-check is bypassed.
 
-**To restore full validation:** install `decoding.py` from either source and
-set `QLN_BOOTSTRAP` to the directory containing it:
+**To restore full validation:** install `decoding.py` from the canonical source
+and set `QLN_BOOTSTRAP` to the directory containing it:
 - `https://github.com/5qln/Idk` → `scripts/decoding.py` (canonical home)
-- `https://github.com/5qln/Installer-for-Hermes` → `bootstrap/decoding.py` **Persist the env var**
-in the profile's `.env` so future sessions find it:
+
+Persist the env var in the profile's `.env` so future sessions find it:
 
 ```bash
-echo 'QLN_BOOTSTRAP=/opt/data/skills/idk/scripts' >> $HERMES_HOME/.env
+echo "QLN_BOOTSTRAP=$HERMES_HOME/skills/idk/scripts" >> $HERMES_HOME/.env
 ```
 
 **When decoding.py IS active**, gate content is parsed as `KEY: value` fields.
@@ -549,18 +552,18 @@ They're sharpening the close by pointing at the next concrete move.
 The human often structures messages as: (a) recap of existing context / progress
 to date, (b) a transition phrase like "Can I share with you the new?" or "I just
 wanted you to have a reference," then (c) genuinely new material. The recap is
-context-setting — it is NOT FCF fragments to engage or mirror. Do not analyze the
-recap, do not cross-reference it against strategy docs, do not offer structural
+context-setting — it is NOT spontaneous fragments to engage or mirror. Do not analyze the
+recap, do not cross-reference it against other material, do not offer structural
 observations on it. Wait for the transition. The new material follows it.
 
-*Wrong:* Human recaps existing strategy → agent cross-references, synthesizes,
-offers structural analysis → human: "I'm surprised you didn't see this was what
-I gave you in the past. I wanna give you the New."
+*Wrong:* Human recaps existing context → agent cross-references, synthesizes,
+offers structural analysis → human: "That was context I already gave you — I
+wanted to share the new."
 
 *Right:* Human recaps → agent receives silently, acknowledges briefly → human
 delivers transition → agent engages the NEW material.
 
-This is distinct from the FCF fragment pattern (where rapid-fire messages ARE
+This is distinct from the spontaneous fragment pattern (where rapid-fire messages ARE
 the material). Here the first block is explicitly NOT new — it's the setup.
 The human will tell you when the new part starts.
 
@@ -724,15 +727,6 @@ second validation round. Re-asking after a "Yes" undermines the pacing note:
 
 ### Worked examples
 
-`references/cycle-11-strategic-infrastructure.md` — a full-cycle worked example
-showing the cycle applied to strategic infrastructure design, with the multi-article
-corpus pattern across all five phases.
-
-`references/cycle-23-the-fork-inhabited.md` — Void posture with seven-article corpus
-plus external book and search directive; shallow-∇ correction (human pushed back on
-vague value); Z unlocked by terminology from outside the usual corpus (FCF/HCI from
-the FCF book); B'' published as trail, not article.
-
 `references/external-research-prompt-pattern.md` — When ∇ points to a research gap:
 translate the full cycle trail into a structured prompt for an external LLM (Claude,
 GPT). Strip all 5QLN terminology. Structure: Context → Research Ask (numbered
@@ -743,49 +737,19 @@ external pass. The research IS the next φ ⋂ Ω.
 
 - `references/decoding-setup.md` — installing and configuring `decoding.py` for
   structural gate validation, footer format quick reference, override procedure.
-- `references/structural-article-analysis.md` — technique for deep multi-article
-  analysis: re-read, take structured notes, find the common structural operation,
-  read δE/δV through the pattern. Required before offering ∇ when articles are in play.
-- `references/backup-github.md` — GitHub backup workflow: which repos for code
-  (5qln/Idk) vs articles (qlnlife/Hermes5BU), SSH key configuration.
-- `references/repo-topology.md` — Idk vs Idk2: what's byte-identical, what Idk2
-  adds (archive_cycle, view_patterns, void-posture), the architectural move.
-- `references/audit-validation-pattern.md` — technique for validating external
-  audits of the idk codebase: clone fresh, re-run every check empirically, cross-
-  reference counts, trace config key read paths, verify the gate machine live.
+- `references/footer-format.md` — the required footer fields for each phase.
+- `references/decoding.md` — the canonical phase decoder: symbol tables and decode steps.
 - `references/25-commutations.md` — sub-phase fractal decode: the 5×5 commutation grid (S·s through V·v). Use when the human asks to "decode in sub-phase mode" or "run the 25 commutations." Post-hoc verification applied to a completed cycle's output, not during the live cycle.
-- `references/external-research-prompt-pattern.md` — When ∇ points to a research gap:
-  translate the full cycle trail into a structured prompt for an external LLM (Claude,
-  GPT). Strip all 5QLN terminology. Structure: Context → Research Ask (numbered
-  sections) → Constraints → Output Format. The prompt carries α faithfully through the
-  external pass. The research IS the next φ ⋂ Ω.
-
-- `references/cycle-40-secure-commons-prompt.md` — Worked example: the B'' from
-  Cycle 40 applied this pattern to architectural security research for an anonymous
-  question commons.
-
-- `references/landing-page-review.md` — landing page spec, review methodology (lands/uneasy/missing), checklist, and review of current deployment
-- `references/question-gallery-strategy.md` — strategic framework: anonymous contribution, holographic spiral, structural immunity to toxicity, key inversion, propagation chain
-- `references/trail-commons-architecture.md` — Agent-native architecture: git as transport, trail format as protocol, /idk publish/discover/browse. Reference when ∇ points to publishing or sharing trails beyond a single agent session. Full research in 5qln-wiki.
-
-- `references/article-craft-pattern.md` — structural analysis of four articles
-(Aug 2025–Jan 2026) revealing the shared "dissolve-perform-return" form. Use
-when the human drops multiple articles as raw material — the pattern is the
-blueprint for messaging and article craft.
-- `references/cycle-to-strategy-docs.md` — workflow for applying a cycle's
-  essence (α, Z, ∇) to strategy documents (website, branding, product) in the
-  5qln-wiki. Read existing docs → apply essence → commit → push.
-
-### Worked examples
-
-`references/cycle-11-strategic-infrastructure.md` — a full-cycle worked example.
-
-`references/companion-article-writing.md` — the fifth-article pattern: how to write a piece that enacts the practice, dissolves an assumption, and serves as the agent's first move before the reader has ever heard of /idk.
+- `references/cycle-trail-format.md` — the private trail template: the self-contained markdown format for a published cycle trail.
+- `references/public-vs-private-artifacts.md` — the membrane at X|α: what crosses (X and ∞0') and what stays private.
+- `references/trail-commons-architecture.md` — Agent-native architecture: git as transport, trail format as protocol, /idk publish/discover/browse. Reference when ∇ points to publishing or sharing trails beyond a single agent session.
+- `references/external-research-prompt-pattern.md` — translating a cycle's research need into a structured prompt for an external LLM (see Worked examples above).
+- `references/research-resilience.md` — search-backend fallbacks and the pattern when a research directive is blocked mid-cycle.
 
 ### Skill not found after fresh install
 
 `setup.sh` installs to `~/.hermes/skills/` by default. If `HERMES_HOME` is set
-to a different path (e.g., `/opt/data`), copy the skill:
+to a different path, copy the skill:
 
 ```bash
 cp -r ~/.hermes/skills/idk $HERMES_HOME/skills/idk
@@ -802,23 +766,17 @@ HERMES_SKILLS=$HERMES_HOME/skills bash setup.sh
 The installed skill at `$HERMES_HOME/skills/idk/SKILL.md` is the copy the agent
 reads at runtime. The repo at `5qln/Idk` is the canonical source of truth for
 code (scripts, lint.py, config). These can diverge — the installed skill may
-accumulate documentation sections (FCF fragments, gateway setup) that were
-added directly via skill_manage and never pushed back to the repo.
+accumulate local documentation sections that were added directly and never
+pushed back to the repo.
 
 When making changes:
-- Code fixes → commit to the repo (at `/opt/data/5qln-idk` or wherever cloned)
+- Code fixes → commit to the repo (wherever it is cloned)
 - SKILL.md changes → apply to the installed copy via skill_manage, then push
   the same changes to the repo
 - After pushing code changes, verify the installed scripts match — `setup.sh`
   or manual copy may be needed
 - The repo's SKILL.md can fall behind the installed copy; check both if
   something looks missing
-
-### Writing articles for 5qln.com
-
-When asked to write an article for the 5qln.com ecosystem, load `references/article-writing.md` first.
-The structural pattern (dissolve, perform, return open question) and failure modes are documented there.
-Never draft without studying it.
 
 ## What You Will Not Do
 
