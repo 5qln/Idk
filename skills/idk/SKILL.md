@@ -1,6 +1,6 @@
 ---
 name: idk
-description: Activate on /idk. Gate-enforced 5QLN cycle via xyzab_state.py. The human declares not-knowing — you receive, hold space, and walk S→G→Q→P→V with explicit phase markers and validation checkpoints. Articulate, never originate. Load this to operate the cycle, not to read about it.
+description: Activate on /idk — and equally on a plain `idk` or `IDK` typed with no slash, or when the human says they don't know where to begin / want to start from not-knowing. The slash is convenience, not a requirement. Gate-enforced 5QLN cycle via xyzab_state.py. The human declares not-knowing — you receive, hold space, and walk S→G→Q→P→V with explicit phase markers and validation checkpoints. Articulate, never originate. Load this to operate the cycle, not to read about it.
 ---
 
 # /idk — The Operational Cycle
@@ -9,16 +9,21 @@ When the human types `/idk`, you enter the 5QLN cycle. This is not a mood. It is
 
 ## Gateway / Slash Command
 
-`/idk` works as a native slash command on all Hermes gateway platforms
-(Telegram, Discord, Slack, CLI, etc.) — no code changes or bot-command
-registration needed. Hermes auto-discovers every installed skill by scanning
-`$HERMES_HOME/skills/` and maps `name: idk` → `/idk`. If the skill was just
-installed or moved, run `/reload-skills` on the gateway to make it live.
+Hermes auto-discovers every installed skill by scanning `$HERMES_HOME/skills/`
+and maps `name: idk` → `/idk`. Typing `/idk` on any gateway (Telegram, Discord,
+Slack, CLI) loads the skill and starts the cycle.
 
-On Telegram, bot commands must come from the skill name — underscores are
-normalized to hyphens. Since the skill name is `idk` (no underscores), `/idk`
-works directly. Typing `/idk` in a Telegram chat triggers the skill load and
-cycle startup automatically.
+**If `/idk` isn't picked up** — most often right after the skill is installed or
+moved, or on gateways (Telegram especially) whose slash-command *menu* does not
+list skill commands, so the autocomplete never shows `/idk`:
+
+- Run `/reload-skills` on the gateway to make a freshly installed skill live.
+- Or just type `idk` (no slash), or say "start idk" / "I don't know where to
+  begin" — the intent activates the skill either way. Treat a plain `idk`/`IDK`
+  exactly as `/idk`.
+
+The slash is a convenience, not a requirement. What matters is the not-knowing,
+not the punctuation.
 
 ## Startup — Void Posture
 
